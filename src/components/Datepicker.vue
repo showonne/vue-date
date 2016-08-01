@@ -11,11 +11,11 @@
                 <div class="arrow-right" @click="month += 1">&gt;</div>
             </div>
             <div class="panel-header" v-show="panelType === 'year'">
-                <div class="arrow-left">&lt;</div>
+                <div class="arrow-left" @click="chYearRange(0)">&lt;</div>
                 <div class="year-range">
                     <span>{{yearList[0]}}</span> - <span>{{yearList[yearList.length - 1]}}</span>
                 </div>
-                <div class="arrow-right">&gt;</div>
+                <div class="arrow-right" @click="chYearRange(1)">&gt;</div>
             </div>
             <div class="type-year" v-show="panelType === 'year'">
                 <ul class="year-list">
@@ -72,8 +72,9 @@
                 month: now.getMonth(),
                 date: now.getDate(),
                 day: now.getDay(),
-                currentDate: '',
-                monthList: [1, 2, 3 ,4 ,5, 6, 7 ,8, 9, 10, 11, 12]
+                currentDate: now.getDate(),
+                monthList: [1, 2, 3 ,4 ,5, 6, 7 ,8, 9, 10, 11, 12],
+                yearList: Array.from({length: 12}, (value, index) => new Date().getFullYear() + index)
             }
         },
         computed: {
@@ -99,20 +100,8 @@
                     dateList.push({nextMonth: true, value: item})
                 }
 
-                console.log(dateList)
                 return dateList
 
-            },
-            yearList() {
-                let currentYear = new Date().getFullYear()
-
-                let yearList = Array.from(new Array(12), (value, index) => {
-                    return currentYear + index
-                })
-
-                console.info(yearList)
-
-                return yearList
             },
             value () {
                 return `${this.year}-${this.month + 1}-${this.currentDate}`
@@ -126,16 +115,23 @@
                 this.currentDate = date.value
                 this.panelState = false
             },
-            selectMonth(month){
+            selectMonth(month) {
                 this.month = month
                 this.panelType = 'date'
             },
-            selectYear(year){
+            selectYear(year) {
                 this.year = year
                 this.panelType = 'month'
             },
             chType(type) {
                 this.panelType = type
+            },
+            chYearRange(next) {
+                if(next){
+                    this.yearList = this.yearList.map((i) => i + 12)
+                }else{
+                    this.yearList = this.yearList.map((i) => i - 12)
+                }
             }
         }
     }
