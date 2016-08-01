@@ -1,14 +1,31 @@
 <template>
-  <datepicker :value.sync="startDate" id="picker"></datepicker>
+    <div id="app">
+        <div class="input-box">
+            <datepicker :value.sync="startDate" class="start-picker"></datepicker>
+            <datepicker :value.sync="endDate" class="end-picker" language="ch"></datepicker>
+        </div>
+        <hr>
+        <h5>Selected Values: {{startDate}} - {{endDate}}</h5>
+    </div>
 </template>
 
 <script>
 
 import datepicker from './components/Datepicker.vue'
 export default {
-  props: ['startDate'],
+  data () {
+    return {
+        startDate: '',
+        endDate: ''
+    }
+  },
   components: {
     datepicker: datepicker
+  },
+  methods: {
+    log() {
+        console.info(this.startDate, '-', this.endDate)
+    }
   }
 }
 </script>
@@ -18,10 +35,19 @@ html {
   height: 100%;
 }
 
-#picker{
-  position: relative;
-  left: 30%;
-  top: 10px;
+#app{
+    max-width: 750px;
+    margin: 0 auto;
+}
+.input-box{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 40px;
+}
+.start-picker, .end-picker{
+    width: 40%;
+    height: 30px;
+    font-size: 18px;
 }
 
 

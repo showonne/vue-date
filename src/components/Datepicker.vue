@@ -1,19 +1,19 @@
 <template>
     <div class="date-picker">
-        <input type="text" @click="togglePanel" v-model="value">
-        <div class="date-panel" v-show="panelState">
+        <input class="input" type="text" @click="togglePanel" v-model="value">
+        <div class="date-panel" v-show="panelState" style="{top: panelMargin}">
             <div class="panel-header" v-show="panelType !== 'year'">
-                <div class="arrow-left" @click="month -= 1">&lt;</div>
+                <div class="arrow-left" @click="month = month > 0 ? month - 1 : month">&lt;</div>
                 <div class="year-month-box">
-                    <div class="year-box" @click="chType('year')">{{year}}</div>
-                    <div class="month-box" @click="chType('month')">{{month + 1}}</div>
+                    <div class="year-box" @click="chType('year')" v-text="year"></div>
+                    <div class="month-box" @click="chType('month')" v-text="month + 1 | month language"></div>
                 </div>
-                <div class="arrow-right" @click="month += 1">&gt;</div>
+                <div class="arrow-right" @click="month = month < 11 ? month + 1 : month">&gt;</div>
             </div>
             <div class="panel-header" v-show="panelType === 'year'">
                 <div class="arrow-left" @click="chYearRange(0)">&lt;</div>
                 <div class="year-range">
-                    <span>{{yearList[0]}}</span> - <span>{{yearList[yearList.length - 1]}}</span>
+                    <span v-text="yearList[0]"></span> - <span v-text="yearList[yearList.length - 1]"></span>
                 </div>
                 <div class="arrow-right" @click="chYearRange(1)">&gt;</div>
             </div>
@@ -30,7 +30,7 @@
             <div class="type-month" v-show="panelType === 'month'">
                 <ul class="month-list">
                     <li v-for="item in monthList" 
-                        v-text="item"
+                        v-text="item | month language"
                         :class="{selected: $index === month}" 
                         @click="selectMonth($index)"
                     >
@@ -39,13 +39,7 @@
             </div>
             <div class="type-date" v-show="panelType === 'date'">
                 <ul class="weeks">
-                    <li>日</li>
-                    <li>一</li>
-                    <li>二</li>
-                    <li>三</li>
-                    <li>四</li>
-                    <li>五</li>
-                    <li>六</li>
+                    <li v-for="item in weekList" v-text="item | week language"></li>
                 </ul>
                 <ul class="date-list">
                     <li v-for="item in dateList" 
@@ -65,7 +59,7 @@
         data () {
             let now = new Date()
             return {
-                panelState: true,
+                panelState: false,
                 now: now,
                 panelType: 'date',
                 year: now.getFullYear(),
@@ -74,7 +68,43 @@
                 day: now.getDay(),
                 currentDate: now.getDate(),
                 monthList: [1, 2, 3 ,4 ,5, 6, 7 ,8, 9, 10, 11, 12],
+                weekList: [0, 1, 2, 3, 4, 5, 6],
                 yearList: Array.from({length: 12}, (value, index) => new Date().getFullYear() + index)
+            }
+        },
+        props: {
+            language: {
+                type: String,
+                default: 'en'
+            },
+            value: {
+                default: null
+            }
+        },
+        filters: {
+            week (item, lang) {
+
+                switch (lang) {
+                    case 'en':
+                        return {0: 'Su', 1: 'Mo', 2: 'Tu', 3: 'We', 4: 'Th', 5: 'Fr', 6: 'Sa'}[item]
+                    case 'ch':
+                        return {0: '日', 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六'}[item]
+                    default:
+                    return
+                }
+            },
+            month (item, lang) {
+
+                switch (lang) {
+                    case 'en':
+                        return {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
+                         7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}[item]
+                    case 'ch':
+                        return {1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六',
+                         7: '七', 8: '八', 9: '九', 10: '十', 11: '十一', 12: '十二'}[item]
+                    default:
+                        return item
+                }
             }
         },
         computed: {
@@ -105,6 +135,9 @@
             },
             value () {
                 return `${this.year}-${this.month + 1}-${this.currentDate}`
+            },
+            panelMargin() {
+                retrun `${window.getComputedStyle(this.$el.children[0], null).height + 4}px`
             }
         },
         methods: {
@@ -112,6 +145,11 @@
                 this.panelState = !this.panelState
             },
             selectDate(date) {
+                if(date.previousMonth){
+                    this.month -= 1
+                }else if(date.nextMonth){
+                    this.month += 1
+                }
                 this.currentDate = date.value
                 this.panelState = false
             },
@@ -141,9 +179,17 @@
     .date-picker{
         position: relative;
     }
+    .input{
+        width: 100%;
+        height: 100%;
+        font-size: inherit;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none;
+        border: 1px solid #ccc;
+    }
     .date-panel{
         position: absolute;
-        top: 40px;
         border: 1px solid #eee;
         box-sizing: border-box;
         width: 300px;
@@ -247,7 +293,6 @@
                 background-color: #e04831;
                 color: #fff;
             }
-
         }
     }
     .year-list{
@@ -267,7 +312,6 @@
                 background-color: #e04831;
                 color: #fff;
             }
-
         }
     }
 </style>
