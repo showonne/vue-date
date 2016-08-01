@@ -45,7 +45,7 @@ html {
     padding-top: 40px;
 }
 .start-picker, .end-picker{
-    width: 40%;
+    width: 30%;
     height: 30px;
     font-size: 18px;
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="date-picker">
-        <input class="input" type="text" @click="togglePanel" v-model="value">
-        <div class="date-panel" v-show="panelState" style="{top: panelMargin}">
+        <div class="input" type="text" @click="togglePanel" v-text="value"></div>
+        <div class="date-panel" v-show="panelState" :style="coordinates" :style="positionX">
             <div class="panel-header" v-show="panelType !== 'year'">
                 <div class="arrow-left" @click="month = month > 0 ? month - 1 : month">&lt;</div>
                 <div class="year-month-box">
@@ -44,7 +44,7 @@
                 <ul class="date-list">
                     <li v-for="item in dateList" 
                         track-by="$index" 
-                        :class="{preMonth: item.previousMonth,nextMonth: item.nextMonth, selected: currentDate === item.value && item.currentMonth}"
+                        :class="{preMonth: item.previousMonth,nextMonth: item.nextMonth, selected: date === item.value && item.currentMonth}"
                         @click="selectDate(item)">
                         {{item.value}}
                     </li>
@@ -60,16 +60,14 @@
             let now = new Date()
             return {
                 panelState: false,
-                now: now,
                 panelType: 'date',
+                coordinates: {},
                 year: now.getFullYear(),
                 month: now.getMonth(),
                 date: now.getDate(),
-                day: now.getDay(),
-                currentDate: now.getDate(),
+                yearList: Array.from({length: 12}, (value, index) => new Date().getFullYear() + index),
                 monthList: [1, 2, 3 ,4 ,5, 6, 7 ,8, 9, 10, 11, 12],
-                weekList: [0, 1, 2, 3, 4, 5, 6],
-                yearList: Array.from({length: 12}, (value, index) => new Date().getFullYear() + index)
+                weekList: [0, 1, 2, 3, 4, 5, 6]
             }
         },
         props: {
@@ -133,11 +131,18 @@
                 return dateList
 
             },
-            value () {
-                return `${this.year}-${this.month + 1}-${this.currentDate}`
-            },
-            panelMargin() {
-                retrun `${window.getComputedStyle(this.$el.children[0], null).height + 4}px`
+            value: {
+                get () {
+                    return `${this.year}-${this.month + 1}-${this.date}`
+                }
+            }
+        },
+        ready() {
+            console.info(this.$el.parentNode.offsetWidth + this.$el.parentNode.offsetLeft - this.$el.offsetLeft <= 300)
+            if(this.$el.parentNode.offsetWidth + this.$el.parentNode.offsetLeft - this.$el.offsetLeft <= 300){
+                this.coordinates = {right: '0', top: `${window.getComputedStyle(this.$el.children[0]).offsetHeight + 4}px`}
+            }else{
+                this.coordinates =  {left: '0', top: `${window.getComputedStyle(this.$el.children[0]).offsetHeight + 4}px`}
             }
         },
         methods: {
@@ -150,7 +155,7 @@
                 }else if(date.nextMonth){
                     this.month += 1
                 }
-                this.currentDate = date.value
+                this.date = date.value
                 this.panelState = false
             },
             selectMonth(month) {
@@ -183,7 +188,8 @@
         width: 100%;
         height: 100%;
         font-size: inherit;
-        padding: 0;
+        line-height: 2;
+        padding-left: 4px;
         box-sizing: border-box;
         outline: none;
         border: 1px solid #ccc;
@@ -229,6 +235,7 @@
         justify-content: space-around;
     }
     .year-box, .month-box{
+        transition: all ease .1s;
         color: #fff;
         flex: 1;
         text-align: center;
@@ -263,6 +270,7 @@
     }
     .date-list{
         li{
+            transition: all ease .1s;
             cursor: pointer;
             &.preMonth, &.nextMonth{
                 color: #ccc;
@@ -281,6 +289,7 @@
         flex-flow: row wrap;
         justify-content: space-between;
         li{
+            transition: all ease .1s;
             text-align: center;
             font-size: 20px;
             width: 33%;
@@ -300,6 +309,7 @@
         flex-flow: row wrap;
         justify-content: space-between;
         li{
+            transition: all ease .1s;
             text-align: center;
             font-size: 20px;
             width: 33%;
