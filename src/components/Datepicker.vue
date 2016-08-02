@@ -45,7 +45,7 @@
                     <li v-for="item in dateList"
                         v-text="item.value" 
                         track-by="$index" 
-                        :class="{preMonth: item.previousMonth,nextMonth: item.nextMonth, selected: date === item.value && item.currentMonth, invalid: validateDate(item)}"
+                        :class="{preMonth: item.previousMonth, nextMonth: item.nextMonth, selected: date === item.value && item.currentMonth, invalid: validateDate(item)}"
                         @click="selectDate(item)">
                     </li>
                 </ul>
@@ -190,13 +190,32 @@
                 }
             },
             validateDate(date) {
-                //validate date logic
-                if(this.validateMonth(this.month)){
+
+                var tmpMonth
+                if(date.previousMonth){
+                    if(this.month === 0){
+                        if(this.validateYear(this.year - 1)){
+                            return true
+                        }else{
+                            tmpMonth = 11
+                        }
+                    }else{
+                        tmpMonth = this.month - 1
+                    }
+                }else if(date.nextMonth){
+                    tmpMonth = this.month + 1
+                }else{
+                    tmpMonth = this.month
+                }
+
+                if(this.validateMonth(tmpMonth)){
                     return true
-                }else if(this.month === this.minMonth -1){
+                }else if(tmpMonth === this.minMonth - 1 && this.minMonth !== this.maxMonth){
                     return date.value < this.minDate ? true : false
-                }else if(this.month === this.maxMonth -1){
+                }else if(tmpMonth === this.maxMonth - 1 && this.minMonth !== this.maxMonth){
                     return date.value > this.maxDate ? true : false
+                }else if(tmpMonth === this.minMonth - 1 && this.minMonth === this.maxMonth){
+                    return date.value > this.maxDate || date.value < this.minDate ? true : false
                 }else{
                     return false
                 }
