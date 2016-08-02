@@ -1,8 +1,8 @@
 <template>
     <div id="app">
         <div class="input-box">
-            <datepicker :value.sync="startDate" class="start-picker"></datepicker>
-            <datepicker :value.sync="endDate" class="end-picker" language="ch"></datepicker>
+            <datepicker :value.sync="startDate" class="start-picker" min="2012-04-20"></datepicker>
+            <datepicker :value.sync="endDate" class="end-picker" language="ch" max="2020-01-20"></datepicker>
         </div>
         <hr>
         <h5>Selected Values: {{startDate}} - {{endDate}}</h5>

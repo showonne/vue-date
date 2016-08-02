@@ -21,7 +21,7 @@
                 <ul class="year-list">
                     <li v-for="item in yearList"
                         v-text="item"
-                        :class="{selected: item === year}" 
+                        :class="{selected: item === year, invalid: validateYear(item)}" 
                         @click="selectYear(item)"
                     >
                     </li>
@@ -29,9 +29,9 @@
             </div>
             <div class="type-month" v-show="panelType === 'month'">
                 <ul class="month-list">
-                    <li v-for="item in monthList" 
+                    <li v-for="item in monthList"
                         v-text="item | month language"
-                        :class="{selected: $index === month}" 
+                        :class="{selected: $index === month, invalid: validateMonth($index)}" 
                         @click="selectMonth($index)"
                     >
                     </li>
@@ -42,11 +42,11 @@
                     <li v-for="item in weekList" v-text="item | week language"></li>
                 </ul>
                 <ul class="date-list">
-                    <li v-for="item in dateList" 
+                    <li v-for="item in dateList"
+                        v-text="item.value" 
                         track-by="$index" 
-                        :class="{preMonth: item.previousMonth,nextMonth: item.nextMonth, selected: date === item.value && item.currentMonth}"
+                        :class="{preMonth: item.previousMonth,nextMonth: item.nextMonth, selected: date === item.value && item.currentMonth, invalid: validateDate(item)}"
                         @click="selectDate(item)">
-                        {{item.value}}
                     </li>
                 </ul>
             </div>
@@ -75,9 +75,18 @@
                 type: String,
                 default: 'en'
             },
-            value: {
-                default: null
-            }
+            value: {default: null},
+            min: {default: '1970-01-01'},
+            minYear: {default: ''},
+            minMonth: {default: ''},
+            minDate: {default: ''},
+            max: {default: '3016-01-01'},
+            maxYear: {default: ''},
+            maxMonth: {default: ''},
+            maxDate: {default: ''},
+            invalidYear: {default: false},
+            invalidMonth: {default: false},
+            invalidDate: {default: false}
         },
         filters: {
             week (item, lang) {
@@ -137,19 +146,11 @@
                 }
             }
         },
-        ready() {
-            console.info(this.$el.parentNode.offsetWidth + this.$el.parentNode.offsetLeft - this.$el.offsetLeft <= 300)
-            if(this.$el.parentNode.offsetWidth + this.$el.parentNode.offsetLeft - this.$el.offsetLeft <= 300){
-                this.coordinates = {right: '0', top: `${window.getComputedStyle(this.$el.children[0]).offsetHeight + 4}px`}
-            }else{
-                this.coordinates =  {left: '0', top: `${window.getComputedStyle(this.$el.children[0]).offsetHeight + 4}px`}
-            }
-        },
         methods: {
-            togglePanel() {
+            togglePanel () {
                 this.panelState = !this.panelState
             },
-            selectDate(date) {
+            selectDate (date) {
                 if(date.previousMonth){
                     this.month -= 1
                 }else if(date.nextMonth){
@@ -158,24 +159,67 @@
                 this.date = date.value
                 this.panelState = false
             },
-            selectMonth(month) {
+            selectMonth (month) {
                 this.month = month
                 this.panelType = 'date'
             },
-            selectYear(year) {
+            selectYear (year) {
                 this.year = year
                 this.panelType = 'month'
             },
-            chType(type) {
+            chType (type) {
                 this.panelType = type
             },
-            chYearRange(next) {
+            chYearRange (next) {
                 if(next){
                     this.yearList = this.yearList.map((i) => i + 12)
                 }else{
                     this.yearList = this.yearList.map((i) => i - 12)
                 }
+            },
+            validateYear(year){
+                return (year > this.maxYear || year < this.minYear) ? true : false
+            },
+            validateMonth(month){
+                if(this.validateYear(this.year)){
+                    return true
+                }else if(this.year === this.maxYear){
+                    return month > this.maxMonth - 1 ? true : false
+                }else if(this.year === this.minYear){
+                    return month < this.minMonth - 1 ? true : false
+                }
+            },
+            validateDate(date) {
+                //validate date logic
+                if(this.validateMonth(this.month)){
+                    return true
+                }else if(this.month === this.minMonth -1){
+                    return date.value < this.minDate ? true : false
+                }else if(this.month === this.maxMonth -1){
+                    return date.value > this.maxDate ? true : false
+                }else{
+                    return false
+                }
             }
+        },
+        ready() {
+            if(this.$el.parentNode.offsetWidth + this.$el.parentNode.offsetLeft - this.$el.offsetLeft <= 300){
+                this.coordinates = {right: '0', top: `${window.getComputedStyle(this.$el.children[0]).offsetHeight + 4}px`}
+            }else{
+                this.coordinates = {left: '0', top: `${window.getComputedStyle(this.$el.children[0]).offsetHeight + 4}px`}
+            }
+
+            let minArr = this.min.split('-')
+            this.minYear = Number(minArr[0])
+            this.minMonth = Number(minArr[1])
+            this.minDate = Number(minArr[2])
+            console.info('min: ', this.minYear, this.minMonth, this.minDate)
+
+            let maxArr = this.max.split('-')
+            this.maxYear = Number(maxArr[0])
+            this.maxMonth = Number(maxArr[1])
+            this.maxDate = Number(maxArr[2])
+            console.info('max: ', this.maxYear, this.maxMonth, this.maxDate)
         }
     }
 </script>
@@ -282,6 +326,9 @@
                 background-color: #e04831;
                 color: #fff;
             }
+            &.invalid{
+                cursor: not-allowed;
+            }
         }
     }
     .month-list{
@@ -301,6 +348,9 @@
             &.selected{
                 background-color: #e04831;
                 color: #fff;
+            }
+            &.invalid{
+                cursor: not-allowed;
             }
         }
     }
@@ -322,7 +372,9 @@
                 background-color: #e04831;
                 color: #fff;
             }
+            &.invalid{
+                cursor: not-allowed;
+            }
         }
     }
 </style>
-
