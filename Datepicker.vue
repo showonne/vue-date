@@ -31,7 +31,7 @@
                 <ul class="month-list">
                     <li v-for="item in monthList"
                         v-text="item | month language"
-                        :class="{selected: $index === tmpMonth, invalid: validateMonth($index)}" 
+                        :class="{selected: $index === tmpMonth && year === tmpYear, invalid: validateMonth($index)}" 
                         @click="selectMonth($index)"
                     >
                     </li>
@@ -109,6 +109,20 @@
                 }
             }
         },
+        watch: {
+            min (v) {
+                let minArr = v.split('-')
+                this.minYear = Number(minArr[0])
+                this.minMonth = Number(minArr[1])
+                this.minDate = Number(minArr[2])
+            },
+            max (v) {
+                let maxArr = v.split('-')
+                this.maxYear = Number(maxArr[0])
+                this.maxMonth = Number(maxArr[1])
+                this.maxDate = Number(maxArr[2])
+            }
+        },
         computed: {
             dateList () {
                 let currentMonthLength = new Date(this.tmpMonth, this.tmpMonth + 1, 0).getDate()
@@ -177,6 +191,7 @@
                     this.month = this.tmpMonth + 1
                     this.tmpMonth += 1
                 }
+                this.year = this.tmpYear
                 this.month = this.tmpMonth
                 this.date = date.value
                 this.value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
@@ -221,11 +236,20 @@
             this.maxYear = Number(maxArr[0])
             this.maxMonth = Number(maxArr[1])
             this.maxDate = Number(maxArr[2])
+
+            if(!this.value){
+                this.value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
+            }
         }
     }
 </script>
 
 <style scoped lang='less'>
+    ul{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
     .date-picker{
         position: relative;
     }
@@ -242,6 +266,7 @@
     }
     .date-panel{
         position: absolute;
+        z-index: 5000;
         border: 1px solid #eee;
         box-sizing: border-box;
         width: 300px;
@@ -277,7 +302,7 @@
         flex-flow: row nowrap;
         justify-content: space-around;
     }
-    .type-year, .type-month{
+    .type-year, .type-month, .date-list{
         background-color: #fff;
     }
     .year-box, .month-box{
@@ -362,7 +387,6 @@
     .weeks, .date-list{
         width: 100%;
         text-align: center;
-        list-style: none;
         .preMonth, .nextMonth{
             color: #ccc;
         }
