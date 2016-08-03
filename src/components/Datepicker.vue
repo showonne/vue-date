@@ -93,7 +93,7 @@
                     case 'ch':
                         return {0: '日', 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六'}[item]
                     default:
-                    return
+                        return item
                 }
             },
             month (item, lang) {
@@ -158,7 +158,6 @@
                     this.tmpYear = year
                     this.panelType = 'month'
                 }
-                
             },
             selectMonth (month) {
                 if(this.validateMonth(month)){
@@ -183,10 +182,10 @@
                 this.value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
                 this.panelState = false
             },
-            validateYear (year){
+            validateYear (year) {
                 return (year > this.maxYear || year < this.minYear) ? true : false
             },
-            validateMonth(month){
+            validateMonth (month) {
                 if(new Date(this.tmpYear, month).getTime() >= new Date(this.minYear, this.minMonth - 1).getTime()
                     && new Date(this.tmpYear, month).getTime() <= new Date(this.maxYear, this.maxMonth - 1).getTime()){
                     return false
@@ -207,7 +206,7 @@
                 return true
             }
         },
-        ready() {
+        ready () {
             if(this.$el.parentNode.offsetWidth + this.$el.parentNode.offsetLeft - this.$el.offsetLeft <= 300){
                 this.coordinates = {right: '0', top: `${window.getComputedStyle(this.$el.children[0]).offsetHeight + 4}px`}
             }else{
@@ -290,12 +289,6 @@
             background-color: #3f51b5;
         }
     }
-    .weeks{
-        background-color: #eee;
-        li{
-            font-weight: 600;
-        }
-    }
     .year-list, .month-list{
         display: flex;
         flex-flow: row wrap;
@@ -303,6 +296,10 @@
         li{
             transition: all ease .1s;
             cursor: pointer;
+            text-align: center;
+            font-size: 20px;
+            width: 33%;
+            padding: 10px 0;
             &:not(.invalid) {
                 &:hover{
                     background-color: #eee;
@@ -350,26 +347,16 @@
         }
         
     }
-    .year-list{
-        li{
-            text-align: center;
-            font-size: 20px;
-            width: 33%;
-            padding: 10px 0;
-        }
-    }
-    .month-list{
-        li{
-            text-align: center;
-            font-size: 20px;
-            width: 33%;
-            padding: 10px 0;
-        }
-    }
-    .weeks, .date-list{
+    .weeks{
+        background-color: #eee;
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
+        li{
+            font-weight: 600;
+        }
+    }
+    .weeks, .date-list{
         width: 100%;
         text-align: center;
         list-style: none;
