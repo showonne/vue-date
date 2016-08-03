@@ -5,7 +5,7 @@
             <div class="panel-header" v-show="panelType !== 'year'">
                 <div class="arrow-left" @click="prevMonthPreview()">&lt;</div>
                 <div class="year-month-box">
-                    <div class="year-box" @click="chType('year')" v-text="year"></div>
+                    <div class="year-box" @click="chType('year')" v-text="tmpYear"></div>
                     <div class="month-box" @click="chType('month')" v-text="tmpMonth + 1 | month language"></div>
                 </div>
                 <div class="arrow-right" @click="nextMonthPreview()">&gt;</div>
@@ -21,7 +21,7 @@
                 <ul class="year-list">
                     <li v-for="item in yearList"
                         v-text="item"
-                        :class="{selected: item === year, invalid: validateYear(item)}" 
+                        :class="{selected: item === tmpYear, invalid: validateYear(item)}" 
                         @click="selectYear(item)"
                     >
                     </li>
@@ -31,7 +31,7 @@
                 <ul class="month-list">
                     <li v-for="item in monthList"
                         v-text="item | month language"
-                        :class="{selected: $index === month, invalid: validateMonth($index)}" 
+                        :class="{selected: $index === tmpMonth, invalid: validateMonth($index)}" 
                         @click="selectMonth($index)"
                     >
                     </li>
@@ -74,11 +74,7 @@
             }
         },
         props: {
-            language: {
-                type: String,
-                default: 'en'
-            },
-            value: null,
+            language: {default: 'en'},
             min: {default: '1970-01-01'},
             max: {default: '3016-01-01'},
             minYear: '',
@@ -86,7 +82,8 @@
             minDate: '',
             maxYear: '',
             maxMonth: '',
-            maxDate: ''
+            maxDate: '',
+            value: null
         },
         filters: {
             week (item, lang) {
@@ -115,53 +112,44 @@
         computed: {
             dateList () {
                 let currentMonthLength = new Date(this.tmpMonth, this.tmpMonth + 1, 0).getDate()
-
-                let dateList = Array.from(new Array(currentMonthLength), (val, index) => {
+                let dateList = Array.from({length: currentMonthLength}, (val, index) => {
                     return {
                         currentMonth: true,
                         value: index + 1
                     }
                 })
-
                 let startDay = new Date(this.year, this.tmpMonth, 1).getDay()
-
                 let previousMongthLength = new Date(this.year, this.tmpMonth, 0).getDate()
 
                 for(let i = 0, len = startDay; i < len; i++){
-                    dateList.unshift({previousMonth: true, value: previousMongthLength - i})
+                    dateList = [{previousMonth: true, value: previousMongthLength - i}].concat(dateList)
                 }
-
                 for(let i = dateList.length, len = 42, item = 1; i < len; i++, item++){
-                    dateList.push({nextMonth: true, value: item})
+                    dateList[dateList.length] = {nextMonth: true, value: item}
                 }
 
                 return dateList
-
-            },
-            value: {
-                get () {
-                    return `${this.year}-${this.month + 1}-${this.date}`
-                }
             }
         },
         methods: {
             togglePanel () {
                 this.panelState = !this.panelState
             },
-            selectDate (date) {
-                if(this.validateDate(date))
-                    return
-                if(date.previousMonth){
-                    this.month = this.tmpMonth - 1
-                    this.tmpMonth -= 1
-                }else if(date.nextMonth){
-                    this.month = this.tmpMonth + 1
-                    this.tmpMonth += 1
+            chType (type) {
+                this.panelType = type
+            },
+            chYearRange (next) {
+                if(next){
+                    this.yearList = this.yearList.map((i) => i + 12)
+                }else{
+                    this.yearList = this.yearList.map((i) => i - 12)
                 }
-                this.year = this.tmpYear
-                this.month = this.tmpMonth
-                this.date = date.value
-                this.panelState = false
+            },
+            prevMonthPreview () {
+                this.tmpMonth = this.tmpMonth === 0 ? 0 : this.tmpMonth - 1
+            },
+            nextMonthPreview () {
+                this.tmpMonth = this.tmpMonth === 11 ? 11 : this.tmpMonth + 1
             },
             selectYear (year) {
                 if(this.validateYear(year)){
@@ -180,26 +168,30 @@
                     this.panelType = 'date'
                 }
             },
-            chType (type) {
-                this.panelType = type
-            },
-            chYearRange (next) {
-                if(next){
-                    this.yearList = this.yearList.map((i) => i + 12)
-                }else{
-                    this.yearList = this.yearList.map((i) => i - 12)
+            selectDate (date) {
+                if(this.validateDate(date))
+                    return
+                if(date.previousMonth){
+                    this.month = this.tmpMonth - 1
+                    this.tmpMonth -= 1
+                }else if(date.nextMonth){
+                    this.month = this.tmpMonth + 1
+                    this.tmpMonth += 1
                 }
+                this.month = this.tmpMonth
+                this.date = date.value
+                this.value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
+                this.panelState = false
             },
             validateYear (year){
                 return (year > this.maxYear || year < this.minYear) ? true : false
             },
             validateMonth(month){
-                if(new Date(this.tmpYear, month) >= new Date(this.minYear, this.minMonth - 1)
-                    && new Date(this.tmpYear, month) <= new Date(this.maxYear, this.maxMonth - 1)){
+                if(new Date(this.tmpYear, month).getTime() >= new Date(this.minYear, this.minMonth - 1).getTime()
+                    && new Date(this.tmpYear, month).getTime() <= new Date(this.maxYear, this.maxMonth - 1).getTime()){
                     return false
-                }else{
-                    return true
                 }
+                return true
             },
             validateDate (date) {
                 let mon = this.tmpMonth
@@ -208,18 +200,11 @@
                 }else if(date.nextMonth){
                     mon += 1
                 }
-                if(new Date(this.tmpYear, mon, date.value) >= new Date(this.minYear, this.minMonth - 1, this.minDate)
-                    && new Date(this.tmpYear, mon, date.value) <= new Date(this.maxYear, this.maxMonth - 1, this.maxDate)){
+                if(new Date(this.tmpYear, mon, date.value).getTime() >= new Date(this.minYear, this.minMonth - 1, this.minDate).getTime()
+                    && new Date(this.tmpYear, mon, date.value).getTime() <= new Date(this.maxYear, this.maxMonth - 1, this.maxDate).getTime()){
                     return false
-                }else{
-                    return true
                 }
-            },
-            prevMonthPreview () {
-                this.tmpMonth = this.tmpMonth === 0 ? 0 : this.tmpMonth - 1
-            },
-            nextMonthPreview () {
-                this.tmpMonth = this.tmpMonth === 11 ? 11 : this.tmpMonth + 1
+                return true
             }
         },
         ready() {
