@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div class="input-box">
-            <datepicker :value.sync="startDate" class="start-picker" min="2012-03-28"></datepicker>
+            <datepicker :value.sync="startDate" class="start-picker" min="2012-03-28" language="ch"></datepicker>
             <datepicker :value.sync="endDate" class="end-picker" language="ch" min="2016-08-10" max="2016-10-28"></datepicker>
         </div>
         <hr>

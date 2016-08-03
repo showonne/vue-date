@@ -46,7 +46,7 @@
                         v-text="item.value" 
                         track-by="$index" 
                         :class="{preMonth: item.previousMonth, nextMonth: item.nextMonth,
-                            selected: date === item.value && month === tmpMonth, invalid: validateDate(item), valid: !validateDate(item)}"
+                            selected: date === item.value && month === tmpMonth && item.currentMonth, invalid: validateDate(item)}"
                         @click="selectDate(item)">
                     </li>
                 </ul>
@@ -66,6 +66,7 @@
                 year: now.getFullYear(),
                 month: now.getMonth(),
                 date: now.getDate(),
+                tmpYear: now.getFullYear(),
                 tmpMonth: now.getMonth(),
                 yearList: Array.from({length: 12}, (value, index) => new Date().getFullYear() + index),
                 monthList: [1, 2, 3 ,4 ,5, 6, 7 ,8, 9, 10, 11, 12],
@@ -77,7 +78,7 @@
                 type: String,
                 default: 'en'
             },
-            value: {default: null},
+            value: null,
             min: {default: '1970-01-01'},
             max: {default: '3016-01-01'},
             minYear: '',
@@ -89,7 +90,6 @@
         },
         filters: {
             week (item, lang) {
-
                 switch (lang) {
                     case 'en':
                         return {0: 'Su', 1: 'Mo', 2: 'Tu', 3: 'We', 4: 'Th', 5: 'Fr', 6: 'Sa'}[item]
@@ -100,7 +100,6 @@
                 }
             },
             month (item, lang) {
-
                 switch (lang) {
                     case 'en':
                         return {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
@@ -115,7 +114,7 @@
         },
         computed: {
             dateList () {
-                let currentMonthLength = new Date(this.year, this.tmpMonth + 1, 0).getDate()
+                let currentMonthLength = new Date(this.tmpMonth, this.tmpMonth + 1, 0).getDate()
 
                 let dateList = Array.from(new Array(currentMonthLength), (val, index) => {
                     return {
@@ -159,17 +158,27 @@
                     this.month = this.tmpMonth + 1
                     this.tmpMonth += 1
                 }
+                this.year = this.tmpYear
                 this.month = this.tmpMonth
                 this.date = date.value
                 this.panelState = false
             },
-            selectMonth (month) {
-                this.tmpMonth = month
-                this.panelType = 'date'
-            },
             selectYear (year) {
-                this.year = year
-                this.panelType = 'month'
+                if(this.validateYear(year)){
+                    return
+                }else{
+                    this.tmpYear = year
+                    this.panelType = 'month'
+                }
+                
+            },
+            selectMonth (month) {
+                if(this.validateMonth(month)){
+                    return
+                }else{
+                    this.tmpMonth = month
+                    this.panelType = 'date'
+                }
             },
             chType (type) {
                 this.panelType = type
@@ -185,44 +194,25 @@
                 return (year > this.maxYear || year < this.minYear) ? true : false
             },
             validateMonth(month){
-                if(this.validateYear(this.year)){
+                if(new Date(this.tmpYear, month) >= new Date(this.minYear, this.minMonth - 1)
+                    && new Date(this.tmpYear, month) <= new Date(this.maxYear, this.maxMonth - 1)){
+                    return false
+                }else{
                     return true
-                }else if(this.year === this.maxYear && this.maxYear !== this.minYear){
-                    return month > this.maxMonth - 1 ? true : false
-                }else if(this.year === this.minYear && this.maxYear !== this.minYear){
-                    return month < this.minMonth - 1 ? true : false
-                }else if(this.year === this.maxYear && this.maxYear === this.minYear){
-                    return month < this.minMonth - 1 || month > this.maxMonth - 1 ? true : false
                 }
             },
             validateDate (date) {
-
-                var tmpMonth
+                let mon = this.tmpMonth
                 if(date.previousMonth){
-                    if(this.tmpMonth === 0){
-                        if(this.validateYear(this.year - 1)){
-                            return true
-                        }else{
-                            tmpMonth = 11
-                        }
-                    }else{
-                        tmpMonth = this.tmpMonth - 1
-                    }
+                    mon -= 1
                 }else if(date.nextMonth){
-                    tmpMonth = this.tmpMonth + 1
-                }else{
-                    tmpMonth = this.tmpMonth
+                    mon += 1
                 }
-                if(this.validateMonth(tmpMonth)){
-                    return true
-                }else if(tmpMonth === this.minMonth - 1 && this.minMonth !== this.maxMonth){
-                    return date.value < this.minDate ? true : false
-                }else if(tmpMonth === this.maxMonth - 1 && this.minMonth !== this.maxMonth){
-                    return date.value > this.maxDate ? true : false
-                }else if(tmpMonth === this.minMonth - 1 && this.minMonth === this.maxMonth){
-                    return date.value > this.maxDate || date.value < this.minDate ? true : false
-                }else{
+                if(new Date(this.tmpYear, mon, date.value) >= new Date(this.minYear, this.minMonth - 1, this.minDate)
+                    && new Date(this.tmpYear, mon, date.value) <= new Date(this.maxYear, this.maxMonth - 1, this.maxDate)){
                     return false
+                }else{
+                    return true
                 }
             },
             prevMonthPreview () {
@@ -233,13 +223,11 @@
             }
         },
         ready() {
-            console.log(this.$el.parentNode.offsetWidth, '-', this.$el.parentNode.offsetLeft, '-', this.$el.offsetLeft)
             if(this.$el.parentNode.offsetWidth + this.$el.parentNode.offsetLeft - this.$el.offsetLeft <= 300){
                 this.coordinates = {right: '0', top: `${window.getComputedStyle(this.$el.children[0]).offsetHeight + 4}px`}
             }else{
                 this.coordinates = {left: '0', top: `${window.getComputedStyle(this.$el.children[0]).offsetHeight + 4}px`}
             }
-
             let minArr = this.min.split('-')
             this.minYear = Number(minArr[0])
             this.minMonth = Number(minArr[1])
@@ -266,6 +254,7 @@
         box-sizing: border-box;
         outline: none;
         border: 1px solid #ccc;
+        border-radius: 2px;
     }
     .date-panel{
         position: absolute;
@@ -277,7 +266,7 @@
         display: flex;
         flex-flow: row nowrap;
         background-color: #8099fc;
-        min-width: 300px;
+        width: 100%;
     }
     .arrow-left, .arrow-right{
         flex: 1;
@@ -289,9 +278,6 @@
         &:hover{
             background-color: #3f51b5;
         }
-    }
-    .type-year, .type-month, .type-date{
-        width: 100%;
     }
     .year-range{
         color: #fff;
@@ -322,7 +308,7 @@
     .weeks{
         background-color: #eee;
         li{
-            font-weight: 800;
+            font-weight: 600;
         }
     }
     .year-list, .month-list{
@@ -332,12 +318,17 @@
         li{
             transition: all ease .1s;
             cursor: pointer;
-            &:hover{
-                background-color: #eee;
+            &:not(.invalid) {
+                &:hover{
+                    background-color: #eee;
+                }
             }
             &.selected{
                 background-color: #e04831;
                 color: #fff;
+                &:hover{
+                    background-color: #f79bab;
+                }
             }
             &.invalid{
                 cursor: not-allowed;
@@ -349,21 +340,30 @@
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
+        .valid:hover{
+            background-color: #eee;
+        }
         li{
             transition: all ease .1s;
             cursor: pointer;
+            &:not(.invalid){
+                &:hover{
+                    background-color: #eee;
+                }
+            }
             &.selected{
                 background-color: #e04831;
                 color: #fff;
+                &:hover{
+                    background-color: #f79bab;
+                }
             }
             &.invalid{
                 cursor: not-allowed;
                 color: #ccc;
             }
         }
-        .valid:hover{
-            background-color: #eee;
-        }
+        
     }
     .year-list{
         li{
@@ -385,23 +385,20 @@
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
-        background-color: #fff;
+        width: 100%;
         text-align: center;
-        width: 300px;
         list-style: none;
         .preMonth, .nextMonth{
             color: #ccc;
         }
         li{
+            font-family: Roboto;
             width: 14%;
             height: 30px;
             text-align: center;
             line-height: 30px;
 
         }
-    }
-    .weeks{
-        background-color: #eee;
     }
     .toggle{
         &-transition{
