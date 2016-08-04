@@ -185,11 +185,23 @@
                 if(this.validateDate(date))
                     return
                 if(date.previousMonth){
-                    this.month = this.tmpMonth - 1
-                    this.tmpMonth -= 1
+                    if(this.tmpMonth === 0){
+                        this.year -= 1
+                        this.tmpYear -= 1
+                        this.month = this.tmpMonth = 11
+                    }else{
+                        this.month = this.tmpMonth - 1
+                        this.tmpMonth -= 1
+                    }
                 }else if(date.nextMonth){
-                    this.month = this.tmpMonth + 1
-                    this.tmpMonth += 1
+                    if(this.tmpMonth === 11){
+                        this.year += 1
+                        this.tmpYear += 1
+                        this.month = this.tmpMonth = 0
+                    }else{
+                        this.month = this.tmpMonth + 1
+                        this.tmpMonth += 1
+                    }
                 }
                 this.year = this.tmpYear
                 this.month = this.tmpMonth
