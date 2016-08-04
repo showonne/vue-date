@@ -20,7 +20,7 @@ module.exports = {
             new htmlWebpackPlugin({
                 template: './index.html'
             }),
-            new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
-            // new webpack.optimize.UglifyJsPlugin({minimize: true})
+            new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+            new webpack.optimize.UglifyJsPlugin({minimize: true})
         ]
 }
