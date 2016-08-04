@@ -7,7 +7,7 @@ module.exports = {
         vendors: ['vue']
     },
     output: {
-        path: './dist',
+        path: './dist/webpack/',
         filename: '[name].js',
     },
     module: {
