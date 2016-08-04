@@ -1,10 +1,14 @@
+var webpack = require('webpack')
 var htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    entry: './index.js',
+    entry: {
+        bundle: './index.js',
+        vendors: ['vue']
+    },
     output: {
         path: './dist',
-        filename: 'bundle.js'
+        filename: '[name].js',
     },
     module: {
         loaders: [
@@ -12,7 +16,11 @@ module.exports = {
             {test: /\.js$/, exclude: /node_modules/, loaders: ['babel']}
         ]
     },
-    plugins: [new htmlWebpackPlugin({
-        template: './index.html'
-    })]
+    plugins: [
+            new htmlWebpackPlugin({
+                template: './index.html'
+            }),
+            new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
+            // new webpack.optimize.UglifyJsPlugin({minimize: true})
+        ]
 }
