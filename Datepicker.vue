@@ -44,7 +44,6 @@
                 <ul class="date-list">
                     <li v-for="item in dateList"
                         v-text="item.value" 
-                        track-by="$index" 
                         :class="{preMonth: item.previousMonth, nextMonth: item.nextMonth,
                             selected: date === item.value && month === tmpMonth && item.currentMonth, invalid: validateDate(item)}"
                         @click="selectDate(item)">
@@ -138,7 +137,7 @@
                 for(let i = 0, len = startDay; i < len; i++){
                     dateList = [{previousMonth: true, value: previousMongthLength - i}].concat(dateList)
                 }
-                for(let i = dateList.length, len = 42, item = 1; i < len; i++, item++){
+                for(let i = dateList.length, item = 1; i < 42; i++, item++){
                     dateList[dateList.length] = {nextMonth: true, value: item}
                 }
 
