@@ -231,6 +231,9 @@
                     return false
                 }
                 return true
+            },
+            close (e) {
+                if(!this.$el.contains(e.target)) this.panelState = false
             }
         },
         ready () {
@@ -252,6 +255,10 @@
             if(!this.value){
                 this.value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
             }
+            window.addEventListener('click', this.close)
+        },
+        beforeDestroy () {
+            window.removeEventListener('click', this.close)
         }
     }
 </script>
