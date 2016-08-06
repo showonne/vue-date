@@ -606,6 +606,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return false;
 	            }
 	            return true;
+	        },
+	        close: function close(e) {
+	            if (!this.$el.contains(e.target)) this.panelState = false;
 	        }
 	    },
 	    ready: function ready() {
@@ -627,6 +630,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (!this.value) {
 	            this.value = this.tmpYear + '-' + ('0' + (this.month + 1)).slice(-2) + '-' + ('0' + this.date).slice(-2);
 	        }
+	        window.addEventListener('click', this.close);
+	    },
+	    beforeDestroy: function beforeDestroy() {
+	        window.removeEventListener('click', this.close);
 	    }
 	};
 
