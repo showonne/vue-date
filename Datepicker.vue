@@ -95,10 +95,6 @@
             range: {
                 type: Boolean,
                 default: false
-            },
-            dateRange: {
-                type: Array,
-                default: () => []
             }
         },
         methods: {
@@ -112,21 +108,15 @@
                         if(!this.range) return item === this.tmpYear
                         return (new Date(item, 0).getTime() >= new Date(this.tmpStartYear, 0).getTime() 
                             && new Date(item, 0).getTime() <= new Date(this.tmpEndYear, 0).getTime())
-
                     case 'month':
                         if(!this.range) return item === this.tmpMonth && this.year === this.tmpYear
                         return (new Date(this.tmpYear, item).getTime() >= new Date(this.tmpStartYear, this.tmpStartMonth).getTime() 
                             && new Date(this.tmpYear, item).getTime() <= new Date(this.tmpEndYear, this.tmpEndMonth).getTime())
-
                     case 'date':
                         if(!this.range) return this.date === item.value && this.month === this.tmpMonth && item.currentMonth
                         let month = this.tmpMonth
-                        if(item.previousMonth){
-                            month--
-                        }
-                        if(item.nextMonth){
-                            month++
-                        }
+                        item.previousMonth && month--
+                        item.nextMonth && month++
                         return (new Date(this.tmpYear, month, item.value).getTime() >= new Date(this.tmpStartYear, this.tmpStartMonth, this.tmpStartDate).getTime() 
                             && new Date(this.tmpYear, month, item.value).getTime() <= new Date(this.tmpEndYear, this.tmpEndMonth, this.tmpEndDate).getTime())
                 }
@@ -148,25 +138,18 @@
                 this.tmpMonth = this.tmpMonth === 11 ? 11 : this.tmpMonth + 1
             },
             selectYear (year) {
-                if(this.validateYear(year)){
-                    return
-                }else{
-                    this.tmpYear = year
-                    this.panelType = 'month'
-                }
+                if(this.validateYear(year)) return
+                this.tmpYear = year
+                this.panelType = 'month'
             },
             selectMonth (month) {
-                if(this.validateMonth(month)){
-                    return
-                }else{
-                    this.tmpMonth = month
-                    this.panelType = 'date'
-                }
+                if(this.validateMonth(month)) return
+                this.tmpMonth = month
+                this.panelType = 'date'
             },
             selectDate (date) {
                 setTimeout(() => {
-                    if(this.validateDate(date))
-                        return
+                    if(this.validateDate(date)) return
                     if(date.previousMonth){
                         if(this.tmpMonth === 0){
                             this.year -= 1
@@ -187,6 +170,7 @@
                         }
                     }
                     if(!this.range){
+
                         this.year = this.tmpYear
                         this.month = this.tmpMonth
                         this.date = date.value
@@ -194,20 +178,19 @@
                         this.panelState = false
 
                     }else if(this.range && !this.rangeStart){
+
                         this.tmpEndYear = this.tmpStartYear = this.tmpYear
                         this.tmpEndMonth = this.tmpStartMonth = this.tmpMonth
                         this.tmpEndDate = this.tmpStartDate = date.value
 
-                        this.tmpRangeEnd = this.tmpRangeStart = `${this.tmpStartYear}-${('0' + (this.tmpStartMonth + 1)).slice(-2)}-${('0' + this.tmpStartDate).slice(-2)}`
                         this.rangeStart = true
 
                     }else if(this.range && this.rangeStart){
+                        
                         this.tmpEndYear = this.tmpYear
                         this.tmpEndMonth = this.tmpMonth
                         this.tmpEndDate = date.value
 
-                        this.tmpRangeEnd = `${this.tmpEndYear}-${('0' + (this.tmpEndMonth + 1)).slice(-2)}-${('0' + this.tmpEndDate).slice(-2)}`
-                        
                         let d1 = new Date(this.tmpStartYear, this.tmpStartMonth, this.tmpStartDate).getTime(),
                             d2 = new Date(this.tmpEndYear, this.tmpEndMonth, this.tmpEndDate).getTime()
                         if(d1 > d2){
@@ -224,18 +207,15 @@
                             this.tmpStartMonth = tmpM
                             this.tmpStartDate = tmpD
                         }
-
                         this.tmpRangeStart = `${this.tmpStartYear}-${('0' + (this.tmpStartMonth + 1)).slice(-2)}-${('0' + this.tmpStartDate).slice(-2)}`
                         this.tmpRangeEnd = `${this.tmpEndYear}-${('0' + (this.tmpEndMonth + 1)).slice(-2)}-${('0' + this.tmpEndDate).slice(-2)}`
 
-                        this.dateRange = [this.tmpRangeStart, this.tmpRangeEnd]
-                        this.value = this.dateRange
+                        this.value = [this.tmpRangeStart, this.tmpRangeEnd]
 
                         this.rangeStart = false
                         this.panelState = false
                     }
                 }, 0)
-                
             },
             validateYear (year) {
                 return (year > this.maxYear || year < this.minYear) ? true : false
@@ -260,7 +240,6 @@
                 }
                 return true
             },
-            
             close (e) {
                 if(!this.$el.contains(e.target)){
                     this.panelState = false
@@ -354,7 +333,6 @@
                 this.tmpEndMonth = Number(rangeEnd[1]) - 1
                 this.tmpEndDate = Number(rangeEnd[2])
             }
-
             if(!this.value){
                 this.value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
             }
