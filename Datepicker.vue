@@ -123,11 +123,9 @@
                         let month = this.tmpMonth
                         if(item.previousMonth){
                             month--
-                            console.log('prev')
                         }
                         if(item.nextMonth){
                             month++
-                            console.log('next')
                         }
                         return (new Date(this.tmpYear, month, item.value).getTime() >= new Date(this.tmpStartYear, this.tmpStartMonth, this.tmpStartDate).getTime() 
                             && new Date(this.tmpYear, month, item.value).getTime() <= new Date(this.tmpEndYear, this.tmpEndMonth, this.tmpEndDate).getTime())
@@ -195,19 +193,16 @@
                     this.panelState = false
 
                 }else if(this.range && !this.rangeStart){
-                    this.tmpStartYear = this.tmpYear
-                    this.tmpStartMonth = this.tmpMonth
-                    this.tmpStartDate = date.value
+                    console.log(this.tmpYear, this.tmpMonth, date.value)
+                    this.tmpEndYear = this.tmpStartYear = this.tmpYear
+                    this.tmpEndMonth = this.tmpStartMonth = this.tmpMonth
+                    this.tmpEndDate = this.tmpStartDate = date.value
 
-                    this.tmpRangeStart = `${this.tmpStartYear}-${('0' + (this.tmpStartMonth + 1)).slice(-2)}-${('0' + this.tmpStartDate).slice(-2)}`
+                    this.tmpRangeEnd = this.tmpRangeStart = `${this.tmpStartYear}-${('0' + (this.tmpStartMonth + 1)).slice(-2)}-${('0' + this.tmpStartDate).slice(-2)}`
                     this.rangeStart = true
 
-                    this.tmpEndYear = 0
-                    this.tmpEndMonth = 0
-                    this.tmpEndDate = 0
-
                 }else if(this.range && this.rangeStart){
-
+                    console.log('!!!')
                     this.tmpEndYear = this.tmpYear
                     this.tmpEndMonth = this.tmpMonth
                     this.tmpEndDate = date.value
@@ -216,30 +211,32 @@
                     
                     let d1 = new Date(this.tmpStartYear, this.tmpStartMonth, this.tmpStartDate).getTime(),
                         d2 = new Date(this.tmpEndYear, this.tmpEndMonth, this.tmpEndDate).getTime()
-                    if(d2 < d1){
+                    console.log(d1 > d2)
+                    if(d1 > d2){
                         let tmpY, tmpM, tmpD
                         tmpY = this.tmpEndYear 
                         tmpM = this.tmpEndMonth
                         tmpD = this.tmpEndDate
 
                         this.tmpEndYear = this.tmpStartYear
-                        this.tmpEndYear = this.tmpStartYear
-                        this.tmpEndYear = this.tmpStartYear
+                        this.tmpEndMonth = this.tmpStartMonth
+                        this.tmpEndDate = this.tmpStartDate
 
                         this.tmpStartYear = tmpY
-                        this.tmpStartYear = tmpM
-                        this.tmpStartYear = tmpD
+                        this.tmpStartMonth = tmpM
+                        this.tmpStartDate = tmpD
                     }
+
+                    this.tmpRangeStart = `${this.tmpStartYear}-${('0' + (this.tmpStartMonth + 1)).slice(-2)}-${('0' + this.tmpStartDate).slice(-2)}`
+                    this.tmpRangeEnd = `${this.tmpEndYear}-${('0' + (this.tmpEndMonth + 1)).slice(-2)}-${('0' + this.tmpEndDate).slice(-2)}`
+
                     this.dateRange = [this.tmpRangeStart, this.tmpRangeEnd]
-                    this.rangeStart = false
-                    this.panelState = false
                     this.value = this.dateRange
 
-
+                    this.rangeStart = false
+                    this.panelState = false
                     console.log('range is: ', this.dateRange)
-
                 }
-                
             },
             validateYear (year) {
                 return (year > this.maxYear || year < this.minYear) ? true : false
@@ -266,9 +263,13 @@
             },
             
             close (e) {
+                console.log(this.$el, e.target)
                 if(!this.$el.contains(e.target)){
+                    console.log('并不属于父元素 呵呵')
                     this.panelState = false
                     this.rangeStart = false
+                }else{
+                    console.log('属于父元素')
                 }
             }
         },
@@ -304,7 +305,6 @@
                 for(let i = dateList.length, item = 1; i < 42; i++, item++){
                     dateList[dateList.length] = {nextMonth: true, value: item}
                 }
-
                 return dateList
             }
         },
@@ -351,14 +351,16 @@
             if(this.range){
                 let rangeStart = this.value[0].split('-')
                 let rangeEnd = this.value[1].split('-')
-                console.info(rangeStart, rangeEnd)
-                this.tmpStartYear = rangeStart[0]
-                this.tmpStartMonth = rangeStart[1]
-                this.tmpStartDate = rangeStart[2]
+                this.tmpStartYear = Number(rangeStart[0])
+                this.tmpStartMonth = Number(rangeStart[1]) - 1
+                this.tmpStartDate = Number(rangeStart[2])
 
-                this.tmpEndYear = rangeEnd[0]
-                this.tmpEndYear = rangeEnd[1]
-                this.tmpEndYear = rangeEnd[2]
+                this.tmpEndYear = Number(rangeEnd[0])
+                this.tmpEndMonth = Number(rangeEnd[1]) - 1
+                this.tmpEndDate = Number(rangeEnd[2])
+
+                console.info(this.tmpEndYear, rangeEnd)
+                
             }
 
             if(!this.value){
