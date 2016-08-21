@@ -445,8 +445,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            tmpEndYear: now.getFullYear(),
 	            tmpEndMonth: now.getMonth(),
 	            tmpEndDate: now.getDate(),
-	            tmpRangeStart: '',
-	            tmpRangeEnd: '',
 	            yearList: (0, _from2.default)({ length: 12 }, function (value, index) {
 	                return new Date().getFullYear() + index;
 	            }),
@@ -585,10 +583,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        _this.tmpStartMonth = tmpM;
 	                        _this.tmpStartDate = tmpD;
 	                    }
-	                    _this.tmpRangeStart = _this.tmpStartYear + '-' + ('0' + (_this.tmpStartMonth + 1)).slice(-2) + '-' + ('0' + _this.tmpStartDate).slice(-2);
-	                    _this.tmpRangeEnd = _this.tmpEndYear + '-' + ('0' + (_this.tmpEndMonth + 1)).slice(-2) + '-' + ('0' + _this.tmpEndDate).slice(-2);
+	                    var RangeStart = _this.tmpStartYear + '-' + ('0' + (_this.tmpStartMonth + 1)).slice(-2) + '-' + ('0' + _this.tmpStartDate).slice(-2);
+	                    var RangeEnd = _this.tmpEndYear + '-' + ('0' + (_this.tmpEndMonth + 1)).slice(-2) + '-' + ('0' + _this.tmpEndDate).slice(-2);
 
-	                    _this.value = [_this.tmpRangeStart, _this.tmpRangeEnd];
+	                    _this.value = [RangeStart, RangeEnd];
 
 	                    _this.rangeStart = false;
 	                    _this.panelState = false;
