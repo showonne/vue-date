@@ -13,6 +13,10 @@
             <datepicker language="ch" :value.sync="end" class="picker" :min.sync="start" max="2020-01-08"></datepicker>
         </div>
         <h5>Selected Range: <b>{{start}}</b> - <b>{{end}}</b>, the range between <b>2015-01-01 -- 2020-01-08</b> and the second's min date decided by first one.</h5>
+        <hr/>
+        <h2>Range selector in single datepicker.</h2>
+        <datepicker language="ch" :value.sync="range" class="picker picker-range" :min.sync="start" max="2020-01-08" :range=true></datepicker>
+        <h5>The range is from <b>{{range[0]}}</b> to <b>{{range[1]}}</b></h5>
     </div>
 </template>
 
@@ -22,8 +26,9 @@
         data () {
             return {
                 selected: '2016-08-03',
-                start: '',
-                end: ''
+                start: '2016-01-01',
+                end: '',
+                range: ['2016-07-01', '2016-09-31']
             }
         },
         components: { datepicker }
