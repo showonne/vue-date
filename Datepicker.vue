@@ -164,79 +164,78 @@
                 }
             },
             selectDate (date) {
-                if(this.validateDate(date))
-                    return
-                if(date.previousMonth){
-                    if(this.tmpMonth === 0){
-                        this.year -= 1
-                        this.tmpYear -= 1
-                        this.month = this.tmpMonth = 11
-                    }else{
-                        this.month = this.tmpMonth - 1
-                        this.tmpMonth -= 1
+                setTimeout(() => {
+                    if(this.validateDate(date))
+                        return
+                    if(date.previousMonth){
+                        if(this.tmpMonth === 0){
+                            this.year -= 1
+                            this.tmpYear -= 1
+                            this.month = this.tmpMonth = 11
+                        }else{
+                            this.month = this.tmpMonth - 1
+                            this.tmpMonth -= 1
+                        }
+                    }else if(date.nextMonth){
+                        if(this.tmpMonth === 11){
+                            this.year += 1
+                            this.tmpYear += 1
+                            this.month = this.tmpMonth = 0
+                        }else{
+                            this.month = this.tmpMonth + 1
+                            this.tmpMonth += 1
+                        }
                     }
-                }else if(date.nextMonth){
-                    if(this.tmpMonth === 11){
-                        this.year += 1
-                        this.tmpYear += 1
-                        this.month = this.tmpMonth = 0
-                    }else{
-                        this.month = this.tmpMonth + 1
-                        this.tmpMonth += 1
+                    if(!this.range){
+                        this.year = this.tmpYear
+                        this.month = this.tmpMonth
+                        this.date = date.value
+                        this.value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
+                        this.panelState = false
+
+                    }else if(this.range && !this.rangeStart){
+                        this.tmpEndYear = this.tmpStartYear = this.tmpYear
+                        this.tmpEndMonth = this.tmpStartMonth = this.tmpMonth
+                        this.tmpEndDate = this.tmpStartDate = date.value
+
+                        this.tmpRangeEnd = this.tmpRangeStart = `${this.tmpStartYear}-${('0' + (this.tmpStartMonth + 1)).slice(-2)}-${('0' + this.tmpStartDate).slice(-2)}`
+                        this.rangeStart = true
+
+                    }else if(this.range && this.rangeStart){
+                        this.tmpEndYear = this.tmpYear
+                        this.tmpEndMonth = this.tmpMonth
+                        this.tmpEndDate = date.value
+
+                        this.tmpRangeEnd = `${this.tmpEndYear}-${('0' + (this.tmpEndMonth + 1)).slice(-2)}-${('0' + this.tmpEndDate).slice(-2)}`
+                        
+                        let d1 = new Date(this.tmpStartYear, this.tmpStartMonth, this.tmpStartDate).getTime(),
+                            d2 = new Date(this.tmpEndYear, this.tmpEndMonth, this.tmpEndDate).getTime()
+                        if(d1 > d2){
+                            let tmpY, tmpM, tmpD
+                            tmpY = this.tmpEndYear 
+                            tmpM = this.tmpEndMonth
+                            tmpD = this.tmpEndDate
+
+                            this.tmpEndYear = this.tmpStartYear
+                            this.tmpEndMonth = this.tmpStartMonth
+                            this.tmpEndDate = this.tmpStartDate
+
+                            this.tmpStartYear = tmpY
+                            this.tmpStartMonth = tmpM
+                            this.tmpStartDate = tmpD
+                        }
+
+                        this.tmpRangeStart = `${this.tmpStartYear}-${('0' + (this.tmpStartMonth + 1)).slice(-2)}-${('0' + this.tmpStartDate).slice(-2)}`
+                        this.tmpRangeEnd = `${this.tmpEndYear}-${('0' + (this.tmpEndMonth + 1)).slice(-2)}-${('0' + this.tmpEndDate).slice(-2)}`
+
+                        this.dateRange = [this.tmpRangeStart, this.tmpRangeEnd]
+                        this.value = this.dateRange
+
+                        this.rangeStart = false
+                        this.panelState = false
                     }
-                }
-                if(!this.range){
-                    this.year = this.tmpYear
-                    this.month = this.tmpMonth
-                    this.date = date.value
-                    this.value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
-                    this.panelState = false
-
-                }else if(this.range && !this.rangeStart){
-                    console.log(this.tmpYear, this.tmpMonth, date.value)
-                    this.tmpEndYear = this.tmpStartYear = this.tmpYear
-                    this.tmpEndMonth = this.tmpStartMonth = this.tmpMonth
-                    this.tmpEndDate = this.tmpStartDate = date.value
-
-                    this.tmpRangeEnd = this.tmpRangeStart = `${this.tmpStartYear}-${('0' + (this.tmpStartMonth + 1)).slice(-2)}-${('0' + this.tmpStartDate).slice(-2)}`
-                    this.rangeStart = true
-
-                }else if(this.range && this.rangeStart){
-                    console.log('!!!')
-                    this.tmpEndYear = this.tmpYear
-                    this.tmpEndMonth = this.tmpMonth
-                    this.tmpEndDate = date.value
-
-                    this.tmpRangeEnd = `${this.tmpEndYear}-${('0' + (this.tmpEndMonth + 1)).slice(-2)}-${('0' + this.tmpEndDate).slice(-2)}`
-                    
-                    let d1 = new Date(this.tmpStartYear, this.tmpStartMonth, this.tmpStartDate).getTime(),
-                        d2 = new Date(this.tmpEndYear, this.tmpEndMonth, this.tmpEndDate).getTime()
-                    console.log(d1 > d2)
-                    if(d1 > d2){
-                        let tmpY, tmpM, tmpD
-                        tmpY = this.tmpEndYear 
-                        tmpM = this.tmpEndMonth
-                        tmpD = this.tmpEndDate
-
-                        this.tmpEndYear = this.tmpStartYear
-                        this.tmpEndMonth = this.tmpStartMonth
-                        this.tmpEndDate = this.tmpStartDate
-
-                        this.tmpStartYear = tmpY
-                        this.tmpStartMonth = tmpM
-                        this.tmpStartDate = tmpD
-                    }
-
-                    this.tmpRangeStart = `${this.tmpStartYear}-${('0' + (this.tmpStartMonth + 1)).slice(-2)}-${('0' + this.tmpStartDate).slice(-2)}`
-                    this.tmpRangeEnd = `${this.tmpEndYear}-${('0' + (this.tmpEndMonth + 1)).slice(-2)}-${('0' + this.tmpEndDate).slice(-2)}`
-
-                    this.dateRange = [this.tmpRangeStart, this.tmpRangeEnd]
-                    this.value = this.dateRange
-
-                    this.rangeStart = false
-                    this.panelState = false
-                    console.log('range is: ', this.dateRange)
-                }
+                }, 0)
+                
             },
             validateYear (year) {
                 return (year > this.maxYear || year < this.minYear) ? true : false
@@ -263,13 +262,9 @@
             },
             
             close (e) {
-                console.log(this.$el, e.target)
                 if(!this.$el.contains(e.target)){
-                    console.log('并不属于父元素 呵呵')
                     this.panelState = false
                     this.rangeStart = false
-                }else{
-                    console.log('属于父元素')
                 }
             }
         },
@@ -358,9 +353,6 @@
                 this.tmpEndYear = Number(rangeEnd[0])
                 this.tmpEndMonth = Number(rangeEnd[1]) - 1
                 this.tmpEndDate = Number(rangeEnd[2])
-
-                console.info(this.tmpEndYear, rangeEnd)
-                
             }
 
             if(!this.value){
@@ -486,6 +478,8 @@
         li{
             transition: all ease .1s;
             cursor: pointer;
+            box-sizing: border-box;
+            border-bottom: 1px solid #fff;
             &:not(.invalid){
                 &:hover{
                     background-color: #eee;
