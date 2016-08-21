@@ -639,7 +639,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    computed: {
 	        dateList: function dateList() {
-	            var currentMonthLength = new Date(this.tmpMonth, this.tmpMonth + 1, 0).getDate();
+	            var currentMonthLength = new Date(this.tmpYear, this.tmpMonth + 1, 0).getDate();
 	            var dateList = (0, _from2.default)({ length: currentMonthLength }, function (val, index) {
 	                return {
 	                    currentMonth: true,

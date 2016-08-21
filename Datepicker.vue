@@ -263,7 +263,7 @@
         },
         computed: {
             dateList () {
-                let currentMonthLength = new Date(this.tmpMonth, this.tmpMonth + 1, 0).getDate()
+                let currentMonthLength = new Date(this.tmpYear, this.tmpMonth + 1, 0).getDate()
                 let dateList = Array.from({length: currentMonthLength}, (val, index) => {
                     return {
                         currentMonth: true,
