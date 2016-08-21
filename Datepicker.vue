@@ -73,8 +73,6 @@
                 tmpEndYear: now.getFullYear(),
                 tmpEndMonth: now.getMonth(),
                 tmpEndDate: now.getDate(),
-                tmpRangeStart: '',
-                tmpRangeEnd: '',
                 yearList: Array.from({length: 12}, (value, index) => new Date().getFullYear() + index),
                 monthList: [1, 2, 3 ,4 ,5, 6, 7 ,8, 9, 10, 11, 12],
                 weekList: [0, 1, 2, 3, 4, 5, 6],
@@ -207,10 +205,10 @@
                             this.tmpStartMonth = tmpM
                             this.tmpStartDate = tmpD
                         }
-                        this.tmpRangeStart = `${this.tmpStartYear}-${('0' + (this.tmpStartMonth + 1)).slice(-2)}-${('0' + this.tmpStartDate).slice(-2)}`
-                        this.tmpRangeEnd = `${this.tmpEndYear}-${('0' + (this.tmpEndMonth + 1)).slice(-2)}-${('0' + this.tmpEndDate).slice(-2)}`
+                        let RangeStart = `${this.tmpStartYear}-${('0' + (this.tmpStartMonth + 1)).slice(-2)}-${('0' + this.tmpStartDate).slice(-2)}`
+                        let RangeEnd = `${this.tmpEndYear}-${('0' + (this.tmpEndMonth + 1)).slice(-2)}-${('0' + this.tmpEndDate).slice(-2)}`
 
-                        this.value = [this.tmpRangeStart, this.tmpRangeEnd]
+                        this.value = [RangeStart, RangeEnd]
 
                         this.rangeStart = false
                         this.panelState = false
