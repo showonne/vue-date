@@ -128,7 +128,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	// module
-	exports.push([module.id, "ul[_v-29b8b991] {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.date-picker[_v-29b8b991] {\n  position: relative;\n}\n.input[_v-29b8b991] {\n  width: 100%;\n  height: 100%;\n  font-size: inherit;\n  line-height: 2;\n  padding-left: 4px;\n  box-sizing: border-box;\n  outline: none;\n  border: 1px solid #ccc;\n  border-radius: 2px;\n}\n.date-panel[_v-29b8b991] {\n  position: absolute;\n  z-index: 5000;\n  border: 1px solid #eee;\n  box-sizing: border-box;\n  width: 300px;\n}\n.panel-header[_v-29b8b991] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row nowrap;\n      flex-flow: row nowrap;\n  background-color: #8099fc;\n  width: 100%;\n}\n.arrow-left[_v-29b8b991],\n.arrow-right[_v-29b8b991] {\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  font-size: 20px;\n  line-height: 2;\n  color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.arrow-left[_v-29b8b991]:hover,\n.arrow-right[_v-29b8b991]:hover {\n  background-color: #3f51b5;\n}\n.year-range[_v-29b8b991] {\n  color: #fff;\n  font-size: 20px;\n  line-height: 2;\n  -webkit-box-flex: 3;\n      -ms-flex: 3;\n          flex: 3;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.year-month-box[_v-29b8b991] {\n  -webkit-box-flex: 3;\n      -ms-flex: 3;\n          flex: 3;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row nowrap;\n      flex-flow: row nowrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n}\n.type-year[_v-29b8b991],\n.type-month[_v-29b8b991],\n.date-list[_v-29b8b991] {\n  background-color: #fff;\n}\n.year-box[_v-29b8b991],\n.month-box[_v-29b8b991] {\n  -webkit-transition: all ease .1s;\n  transition: all ease .1s;\n  color: #fff;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  text-align: center;\n  font-size: 20px;\n  line-height: 2;\n  cursor: pointer;\n}\n.year-box[_v-29b8b991]:hover,\n.month-box[_v-29b8b991]:hover {\n  background-color: #3f51b5;\n}\n.year-list[_v-29b8b991],\n.month-list[_v-29b8b991] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.year-list li[_v-29b8b991],\n.month-list li[_v-29b8b991] {\n  -webkit-transition: all ease .1s;\n  transition: all ease .1s;\n  cursor: pointer;\n  text-align: center;\n  font-size: 20px;\n  width: 33%;\n  padding: 10px 0;\n}\n.year-list li[_v-29b8b991]:not(.invalid):hover,\n.month-list li[_v-29b8b991]:not(.invalid):hover {\n  background-color: #eee;\n}\n.year-list li.selected[_v-29b8b991],\n.month-list li.selected[_v-29b8b991] {\n  background-color: #e04831;\n  color: #fff;\n}\n.year-list li.selected[_v-29b8b991]:hover,\n.month-list li.selected[_v-29b8b991]:hover {\n  background-color: #f79bab;\n}\n.year-list li.invalid[_v-29b8b991],\n.month-list li.invalid[_v-29b8b991] {\n  cursor: not-allowed;\n  color: #ccc;\n}\n.date-list[_v-29b8b991] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.date-list .valid[_v-29b8b991]:hover {\n  background-color: #eee;\n}\n.date-list li[_v-29b8b991] {\n  -webkit-transition: all ease .1s;\n  transition: all ease .1s;\n  cursor: pointer;\n}\n.date-list li[_v-29b8b991]:not(.invalid):hover {\n  background-color: #eee;\n}\n.date-list li.selected[_v-29b8b991] {\n  background-color: #e04831;\n  color: #fff;\n}\n.date-list li.selected[_v-29b8b991]:hover {\n  background-color: #f79bab;\n}\n.date-list li.invalid[_v-29b8b991] {\n  cursor: not-allowed;\n  color: #ccc;\n}\n.weeks[_v-29b8b991] {\n  background-color: #eee;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.weeks li[_v-29b8b991] {\n  font-weight: 600;\n}\n.weeks[_v-29b8b991],\n.date-list[_v-29b8b991] {\n  width: 100%;\n  text-align: center;\n}\n.weeks .preMonth[_v-29b8b991],\n.date-list .preMonth[_v-29b8b991],\n.weeks .nextMonth[_v-29b8b991],\n.date-list .nextMonth[_v-29b8b991] {\n  color: #ccc;\n}\n.weeks li[_v-29b8b991],\n.date-list li[_v-29b8b991] {\n  font-family: Roboto;\n  width: 14%;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n}\n.toggle-transition[_v-29b8b991] {\n  -webkit-transition: all ease .2s;\n  transition: all ease .2s;\n}\n.toggle-enter[_v-29b8b991],\n.toggle-leave[_v-29b8b991] {\n  opacity: 0;\n}\n", ""]);
+	exports.push([module.id, "ul[_v-29b8b991] {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.date-picker[_v-29b8b991] {\n  position: relative;\n}\n.input[_v-29b8b991] {\n  width: 100%;\n  height: 100%;\n  font-size: inherit;\n  line-height: 2;\n  padding-left: 4px;\n  box-sizing: border-box;\n  outline: none;\n  border: 1px solid #ccc;\n  border-radius: 2px;\n}\n.date-panel[_v-29b8b991] {\n  position: absolute;\n  z-index: 5000;\n  border: 1px solid #eee;\n  box-sizing: border-box;\n  width: 300px;\n}\n.panel-header[_v-29b8b991] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row nowrap;\n      flex-flow: row nowrap;\n  background-color: #8099fc;\n  width: 100%;\n}\n.arrow-left[_v-29b8b991],\n.arrow-right[_v-29b8b991] {\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  font-size: 20px;\n  line-height: 2;\n  color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.arrow-left[_v-29b8b991]:hover,\n.arrow-right[_v-29b8b991]:hover {\n  background-color: #3f51b5;\n}\n.year-range[_v-29b8b991] {\n  color: #fff;\n  font-size: 20px;\n  line-height: 2;\n  -webkit-box-flex: 3;\n      -ms-flex: 3;\n          flex: 3;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n.year-month-box[_v-29b8b991] {\n  -webkit-box-flex: 3;\n      -ms-flex: 3;\n          flex: 3;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row nowrap;\n      flex-flow: row nowrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n}\n.type-year[_v-29b8b991],\n.type-month[_v-29b8b991],\n.date-list[_v-29b8b991] {\n  background-color: #fff;\n}\n.year-box[_v-29b8b991],\n.month-box[_v-29b8b991] {\n  -webkit-transition: all ease .1s;\n  transition: all ease .1s;\n  color: #fff;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  text-align: center;\n  font-size: 20px;\n  line-height: 2;\n  cursor: pointer;\n}\n.year-box[_v-29b8b991]:hover,\n.month-box[_v-29b8b991]:hover {\n  background-color: #3f51b5;\n}\n.year-list[_v-29b8b991],\n.month-list[_v-29b8b991] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.year-list li[_v-29b8b991],\n.month-list li[_v-29b8b991] {\n  -webkit-transition: all ease .1s;\n  transition: all ease .1s;\n  cursor: pointer;\n  text-align: center;\n  font-size: 20px;\n  width: 33%;\n  padding: 10px 0;\n}\n.year-list li[_v-29b8b991]:not(.invalid):hover,\n.month-list li[_v-29b8b991]:not(.invalid):hover {\n  background-color: #eee;\n}\n.year-list li.selected[_v-29b8b991],\n.month-list li.selected[_v-29b8b991] {\n  background-color: #e04831;\n  color: #fff;\n}\n.year-list li.selected[_v-29b8b991]:hover,\n.month-list li.selected[_v-29b8b991]:hover {\n  background-color: #f79bab;\n}\n.year-list li.invalid[_v-29b8b991],\n.month-list li.invalid[_v-29b8b991] {\n  cursor: not-allowed;\n  color: #ccc;\n}\n.date-list[_v-29b8b991] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.date-list .valid[_v-29b8b991]:hover {\n  background-color: #eee;\n}\n.date-list li[_v-29b8b991] {\n  -webkit-transition: all ease .1s;\n  transition: all ease .1s;\n  cursor: pointer;\n  box-sizing: border-box;\n  border-bottom: 1px solid #fff;\n}\n.date-list li[_v-29b8b991]:not(.invalid):hover {\n  background-color: #eee;\n}\n.date-list li.selected[_v-29b8b991] {\n  background-color: #e04831;\n  color: #fff;\n}\n.date-list li.selected[_v-29b8b991]:hover {\n  background-color: #f79bab;\n}\n.date-list li.invalid[_v-29b8b991] {\n  cursor: not-allowed;\n  color: #ccc;\n}\n.weeks[_v-29b8b991] {\n  background-color: #eee;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-flow: row wrap;\n      flex-flow: row wrap;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.weeks li[_v-29b8b991] {\n  font-weight: 600;\n}\n.weeks[_v-29b8b991],\n.date-list[_v-29b8b991] {\n  width: 100%;\n  text-align: center;\n}\n.weeks .preMonth[_v-29b8b991],\n.date-list .preMonth[_v-29b8b991],\n.weeks .nextMonth[_v-29b8b991],\n.date-list .nextMonth[_v-29b8b991] {\n  color: #ccc;\n}\n.weeks li[_v-29b8b991],\n.date-list li[_v-29b8b991] {\n  font-family: Roboto;\n  width: 14%;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n}\n.toggle-transition[_v-29b8b991] {\n  -webkit-transition: all ease .2s;\n  transition: all ease .2s;\n}\n.toggle-enter[_v-29b8b991],\n.toggle-leave[_v-29b8b991] {\n  opacity: 0;\n}\n", ""]);
 
 	// exports
 
@@ -439,11 +439,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	            date: now.getDate(),
 	            tmpYear: now.getFullYear(),
 	            tmpMonth: now.getMonth(),
+	            tmpStartYear: now.getFullYear(),
+	            tmpStartMonth: now.getMonth(),
+	            tmpStartDate: now.getDate(),
+	            tmpEndYear: now.getFullYear(),
+	            tmpEndMonth: now.getMonth(),
+	            tmpEndDate: now.getDate(),
+	            tmpRangeStart: '',
+	            tmpRangeEnd: '',
 	            yearList: (0, _from2.default)({ length: 12 }, function (value, index) {
 	                return new Date().getFullYear() + index;
 	            }),
 	            monthList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-	            weekList: [0, 1, 2, 3, 4, 5, 6]
+	            weekList: [0, 1, 2, 3, 4, 5, 6],
+	            rangeStart: false
 	        };
 	    },
 
@@ -457,29 +466,160 @@ return /******/ (function(modules) { // webpackBootstrap
 	        maxYear: Number,
 	        maxMonth: Number,
 	        maxDate: Number,
-	        value: String
+	        value: [String, Array],
+	        range: {
+	            type: Boolean,
+	            default: false
+	        }
 	    },
-	    filters: {
-	        week: function week(item, lang) {
-	            switch (lang) {
-	                case 'en':
-	                    return { 0: 'Su', 1: 'Mo', 2: 'Tu', 3: 'We', 4: 'Th', 5: 'Fr', 6: 'Sa' }[item];
-	                case 'ch':
-	                    return { 0: '日', 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六' }[item];
-	                default:
-	                    return item;
+	    methods: {
+	        togglePanel: function togglePanel() {
+	            this.panelState = !this.panelState;
+	            this.rangeStart = false;
+	        },
+	        isSelected: function isSelected(type, item) {
+	            switch (type) {
+	                case 'year':
+	                    if (!this.range) return item === this.tmpYear;
+	                    return new Date(item, 0).getTime() >= new Date(this.tmpStartYear, 0).getTime() && new Date(item, 0).getTime() <= new Date(this.tmpEndYear, 0).getTime();
+	                case 'month':
+	                    if (!this.range) return item === this.tmpMonth && this.year === this.tmpYear;
+	                    return new Date(this.tmpYear, item).getTime() >= new Date(this.tmpStartYear, this.tmpStartMonth).getTime() && new Date(this.tmpYear, item).getTime() <= new Date(this.tmpEndYear, this.tmpEndMonth).getTime();
+	                case 'date':
+	                    if (!this.range) return this.date === item.value && this.month === this.tmpMonth && item.currentMonth;
+	                    var month = this.tmpMonth;
+	                    item.previousMonth && month--;
+	                    item.nextMonth && month++;
+	                    return new Date(this.tmpYear, month, item.value).getTime() >= new Date(this.tmpStartYear, this.tmpStartMonth, this.tmpStartDate).getTime() && new Date(this.tmpYear, month, item.value).getTime() <= new Date(this.tmpEndYear, this.tmpEndMonth, this.tmpEndDate).getTime();
 	            }
 	        },
-	        month: function month(item, lang) {
-	            switch (lang) {
-	                case 'en':
-	                    return { 1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
-	                        7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec' }[item];
-	                case 'ch':
-	                    return { 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六',
-	                        7: '七', 8: '八', 9: '九', 10: '十', 11: '十一', 12: '十二' }[item];
-	                default:
-	                    return item;
+	        chType: function chType(type) {
+	            this.panelType = type;
+	        },
+	        chYearRange: function chYearRange(next) {
+	            if (next) {
+	                this.yearList = this.yearList.map(function (i) {
+	                    return i + 12;
+	                });
+	            } else {
+	                this.yearList = this.yearList.map(function (i) {
+	                    return i - 12;
+	                });
+	            }
+	        },
+	        prevMonthPreview: function prevMonthPreview() {
+	            this.tmpMonth = this.tmpMonth === 0 ? 0 : this.tmpMonth - 1;
+	        },
+	        nextMonthPreview: function nextMonthPreview() {
+	            this.tmpMonth = this.tmpMonth === 11 ? 11 : this.tmpMonth + 1;
+	        },
+	        selectYear: function selectYear(year) {
+	            if (this.validateYear(year)) return;
+	            this.tmpYear = year;
+	            this.panelType = 'month';
+	        },
+	        selectMonth: function selectMonth(month) {
+	            if (this.validateMonth(month)) return;
+	            this.tmpMonth = month;
+	            this.panelType = 'date';
+	        },
+	        selectDate: function selectDate(date) {
+	            var _this = this;
+
+	            setTimeout(function () {
+	                if (_this.validateDate(date)) return;
+	                if (date.previousMonth) {
+	                    if (_this.tmpMonth === 0) {
+	                        _this.year -= 1;
+	                        _this.tmpYear -= 1;
+	                        _this.month = _this.tmpMonth = 11;
+	                    } else {
+	                        _this.month = _this.tmpMonth - 1;
+	                        _this.tmpMonth -= 1;
+	                    }
+	                } else if (date.nextMonth) {
+	                    if (_this.tmpMonth === 11) {
+	                        _this.year += 1;
+	                        _this.tmpYear += 1;
+	                        _this.month = _this.tmpMonth = 0;
+	                    } else {
+	                        _this.month = _this.tmpMonth + 1;
+	                        _this.tmpMonth += 1;
+	                    }
+	                }
+	                if (!_this.range) {
+
+	                    _this.year = _this.tmpYear;
+	                    _this.month = _this.tmpMonth;
+	                    _this.date = date.value;
+	                    _this.value = _this.tmpYear + '-' + ('0' + (_this.month + 1)).slice(-2) + '-' + ('0' + _this.date).slice(-2);
+	                    _this.panelState = false;
+	                } else if (_this.range && !_this.rangeStart) {
+
+	                    _this.tmpEndYear = _this.tmpStartYear = _this.tmpYear;
+	                    _this.tmpEndMonth = _this.tmpStartMonth = _this.tmpMonth;
+	                    _this.tmpEndDate = _this.tmpStartDate = date.value;
+
+	                    _this.rangeStart = true;
+	                } else if (_this.range && _this.rangeStart) {
+
+	                    _this.tmpEndYear = _this.tmpYear;
+	                    _this.tmpEndMonth = _this.tmpMonth;
+	                    _this.tmpEndDate = date.value;
+
+	                    var d1 = new Date(_this.tmpStartYear, _this.tmpStartMonth, _this.tmpStartDate).getTime(),
+	                        d2 = new Date(_this.tmpEndYear, _this.tmpEndMonth, _this.tmpEndDate).getTime();
+	                    if (d1 > d2) {
+	                        var tmpY = void 0,
+	                            tmpM = void 0,
+	                            tmpD = void 0;
+	                        tmpY = _this.tmpEndYear;
+	                        tmpM = _this.tmpEndMonth;
+	                        tmpD = _this.tmpEndDate;
+
+	                        _this.tmpEndYear = _this.tmpStartYear;
+	                        _this.tmpEndMonth = _this.tmpStartMonth;
+	                        _this.tmpEndDate = _this.tmpStartDate;
+
+	                        _this.tmpStartYear = tmpY;
+	                        _this.tmpStartMonth = tmpM;
+	                        _this.tmpStartDate = tmpD;
+	                    }
+	                    _this.tmpRangeStart = _this.tmpStartYear + '-' + ('0' + (_this.tmpStartMonth + 1)).slice(-2) + '-' + ('0' + _this.tmpStartDate).slice(-2);
+	                    _this.tmpRangeEnd = _this.tmpEndYear + '-' + ('0' + (_this.tmpEndMonth + 1)).slice(-2) + '-' + ('0' + _this.tmpEndDate).slice(-2);
+
+	                    _this.value = [_this.tmpRangeStart, _this.tmpRangeEnd];
+
+	                    _this.rangeStart = false;
+	                    _this.panelState = false;
+	                }
+	            }, 0);
+	        },
+	        validateYear: function validateYear(year) {
+	            return year > this.maxYear || year < this.minYear ? true : false;
+	        },
+	        validateMonth: function validateMonth(month) {
+	            if (new Date(this.tmpYear, month).getTime() >= new Date(this.minYear, this.minMonth - 1).getTime() && new Date(this.tmpYear, month).getTime() <= new Date(this.maxYear, this.maxMonth - 1).getTime()) {
+	                return false;
+	            }
+	            return true;
+	        },
+	        validateDate: function validateDate(date) {
+	            var mon = this.tmpMonth;
+	            if (date.previousMonth) {
+	                mon -= 1;
+	            } else if (date.nextMonth) {
+	                mon += 1;
+	            }
+	            if (new Date(this.tmpYear, mon, date.value).getTime() >= new Date(this.minYear, this.minMonth - 1, this.minDate).getTime() && new Date(this.tmpYear, mon, date.value).getTime() <= new Date(this.maxYear, this.maxMonth - 1, this.maxDate).getTime()) {
+	                return false;
+	            }
+	            return true;
+	        },
+	        close: function close(e) {
+	            if (!this.$el.contains(e.target)) {
+	                this.panelState = false;
+	                this.rangeStart = false;
 	            }
 	        }
 	    },
@@ -515,100 +655,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	            for (var _i = dateList.length, item = 1; _i < 42; _i++, item++) {
 	                dateList[dateList.length] = { nextMonth: true, value: item };
 	            }
-
 	            return dateList;
 	        }
 	    },
-	    methods: {
-	        togglePanel: function togglePanel() {
-	            this.panelState = !this.panelState;
-	        },
-	        chType: function chType(type) {
-	            this.panelType = type;
-	        },
-	        chYearRange: function chYearRange(next) {
-	            if (next) {
-	                this.yearList = this.yearList.map(function (i) {
-	                    return i + 12;
-	                });
-	            } else {
-	                this.yearList = this.yearList.map(function (i) {
-	                    return i - 12;
-	                });
+	    filters: {
+	        week: function week(item, lang) {
+	            switch (lang) {
+	                case 'en':
+	                    return { 0: 'Su', 1: 'Mo', 2: 'Tu', 3: 'We', 4: 'Th', 5: 'Fr', 6: 'Sa' }[item];
+	                case 'ch':
+	                    return { 0: '日', 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六' }[item];
+	                default:
+	                    return item;
 	            }
 	        },
-	        prevMonthPreview: function prevMonthPreview() {
-	            this.tmpMonth = this.tmpMonth === 0 ? 0 : this.tmpMonth - 1;
-	        },
-	        nextMonthPreview: function nextMonthPreview() {
-	            this.tmpMonth = this.tmpMonth === 11 ? 11 : this.tmpMonth + 1;
-	        },
-	        selectYear: function selectYear(year) {
-	            if (this.validateYear(year)) {
-	                return;
-	            } else {
-	                this.tmpYear = year;
-	                this.panelType = 'month';
+	        month: function month(item, lang) {
+	            switch (lang) {
+	                case 'en':
+	                    return { 1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
+	                        7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec' }[item];
+	                case 'ch':
+	                    return { 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六',
+	                        7: '七', 8: '八', 9: '九', 10: '十', 11: '十一', 12: '十二' }[item];
+	                default:
+	                    return item;
 	            }
-	        },
-	        selectMonth: function selectMonth(month) {
-	            if (this.validateMonth(month)) {
-	                return;
-	            } else {
-	                this.tmpMonth = month;
-	                this.panelType = 'date';
-	            }
-	        },
-	        selectDate: function selectDate(date) {
-	            if (this.validateDate(date)) return;
-	            if (date.previousMonth) {
-	                if (this.tmpMonth === 0) {
-	                    this.year -= 1;
-	                    this.tmpYear -= 1;
-	                    this.month = this.tmpMonth = 11;
-	                } else {
-	                    this.month = this.tmpMonth - 1;
-	                    this.tmpMonth -= 1;
-	                }
-	            } else if (date.nextMonth) {
-	                if (this.tmpMonth === 11) {
-	                    this.year += 1;
-	                    this.tmpYear += 1;
-	                    this.month = this.tmpMonth = 0;
-	                } else {
-	                    this.month = this.tmpMonth + 1;
-	                    this.tmpMonth += 1;
-	                }
-	            }
-	            this.year = this.tmpYear;
-	            this.month = this.tmpMonth;
-	            this.date = date.value;
-	            this.value = this.tmpYear + '-' + ('0' + (this.month + 1)).slice(-2) + '-' + ('0' + this.date).slice(-2);
-	            this.panelState = false;
-	        },
-	        validateYear: function validateYear(year) {
-	            return year > this.maxYear || year < this.minYear ? true : false;
-	        },
-	        validateMonth: function validateMonth(month) {
-	            if (new Date(this.tmpYear, month).getTime() >= new Date(this.minYear, this.minMonth - 1).getTime() && new Date(this.tmpYear, month).getTime() <= new Date(this.maxYear, this.maxMonth - 1).getTime()) {
-	                return false;
-	            }
-	            return true;
-	        },
-	        validateDate: function validateDate(date) {
-	            var mon = this.tmpMonth;
-	            if (date.previousMonth) {
-	                mon -= 1;
-	            } else if (date.nextMonth) {
-	                mon += 1;
-	            }
-	            if (new Date(this.tmpYear, mon, date.value).getTime() >= new Date(this.minYear, this.minMonth - 1, this.minDate).getTime() && new Date(this.tmpYear, mon, date.value).getTime() <= new Date(this.maxYear, this.maxMonth - 1, this.maxDate).getTime()) {
-	                return false;
-	            }
-	            return true;
-	        },
-	        close: function close(e) {
-	            if (!this.$el.contains(e.target)) this.panelState = false;
 	        }
 	    },
 	    ready: function ready() {
@@ -627,6 +698,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.maxMonth = Number(maxArr[1]);
 	        this.maxDate = Number(maxArr[2]);
 
+	        if (this.range) {
+	            var rangeStart = this.value[0].split('-');
+	            var rangeEnd = this.value[1].split('-');
+	            this.tmpStartYear = Number(rangeStart[0]);
+	            this.tmpStartMonth = Number(rangeStart[1]) - 1;
+	            this.tmpStartDate = Number(rangeStart[2]);
+
+	            this.tmpEndYear = Number(rangeEnd[0]);
+	            this.tmpEndMonth = Number(rangeEnd[1]) - 1;
+	            this.tmpEndDate = Number(rangeEnd[2]);
+	        }
 	        if (!this.value) {
 	            this.value = this.tmpYear + '-' + ('0' + (this.month + 1)).slice(-2) + '-' + ('0' + this.date).slice(-2);
 	        }
@@ -1513,7 +1595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 60 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"date-picker\" _v-29b8b991=\"\">\n    <div class=\"input\" type=\"text\" @click=\"togglePanel\" v-text=\"value\" _v-29b8b991=\"\"></div>\n    <div class=\"date-panel\" v-show=\"panelState\" :style=\"coordinates\" transition=\"toggle\" _v-29b8b991=\"\">\n        <div class=\"panel-header\" v-show=\"panelType !== 'year'\" _v-29b8b991=\"\">\n            <div class=\"arrow-left\" @click=\"prevMonthPreview()\" _v-29b8b991=\"\">&lt;</div>\n            <div class=\"year-month-box\" _v-29b8b991=\"\">\n                <div class=\"year-box\" @click=\"chType('year')\" v-text=\"tmpYear\" _v-29b8b991=\"\"></div>\n                <div class=\"month-box\" @click=\"chType('month')\" v-text=\"tmpMonth + 1 | month language\" _v-29b8b991=\"\"></div>\n            </div>\n            <div class=\"arrow-right\" @click=\"nextMonthPreview()\" _v-29b8b991=\"\">&gt;</div>\n        </div>\n        <div class=\"panel-header\" v-show=\"panelType === 'year'\" _v-29b8b991=\"\">\n            <div class=\"arrow-left\" @click=\"chYearRange(0)\" _v-29b8b991=\"\">&lt;</div>\n            <div class=\"year-range\" _v-29b8b991=\"\">\n                <span v-text=\"yearList[0]\" _v-29b8b991=\"\"></span> - <span v-text=\"yearList[yearList.length - 1]\" _v-29b8b991=\"\"></span>\n            </div>\n            <div class=\"arrow-right\" @click=\"chYearRange(1)\" _v-29b8b991=\"\">&gt;</div>\n        </div>\n        <div class=\"type-year\" v-show=\"panelType === 'year'\" _v-29b8b991=\"\">\n            <ul class=\"year-list\" _v-29b8b991=\"\">\n                <li v-for=\"item in yearList\" v-text=\"item\" :class=\"{selected: item === tmpYear, invalid: validateYear(item)}\" @click=\"selectYear(item)\" _v-29b8b991=\"\">\n                </li>\n            </ul>\n        </div>\n        <div class=\"type-month\" v-show=\"panelType === 'month'\" _v-29b8b991=\"\">\n            <ul class=\"month-list\" _v-29b8b991=\"\">\n                <li v-for=\"item in monthList\" v-text=\"item | month language\" :class=\"{selected: $index === tmpMonth &amp;&amp; year === tmpYear, invalid: validateMonth($index)}\" @click=\"selectMonth($index)\" _v-29b8b991=\"\">\n                </li>\n            </ul>\n        </div>\n        <div class=\"type-date\" v-show=\"panelType === 'date'\" _v-29b8b991=\"\">\n            <ul class=\"weeks\" _v-29b8b991=\"\">\n                <li v-for=\"item in weekList\" v-text=\"item | week language\" _v-29b8b991=\"\"></li>\n            </ul>\n            <ul class=\"date-list\" _v-29b8b991=\"\">\n                <li v-for=\"item in dateList\" v-text=\"item.value\" :class=\"{preMonth: item.previousMonth, nextMonth: item.nextMonth,\n                        selected: date === item.value &amp;&amp; month === tmpMonth &amp;&amp; item.currentMonth, invalid: validateDate(item)}\" @click=\"selectDate(item)\" _v-29b8b991=\"\">\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"date-picker\" _v-29b8b991=\"\">\n    <div class=\"input\" type=\"text\" @click=\"togglePanel\" v-text=\"range ? value[0] + ' -- ' + value[1] : value\" _v-29b8b991=\"\"></div>\n    <div class=\"date-panel\" v-show=\"panelState\" :style=\"coordinates\" transition=\"toggle\" _v-29b8b991=\"\">\n        <div class=\"panel-header\" v-show=\"panelType !== 'year'\" _v-29b8b991=\"\">\n            <div class=\"arrow-left\" @click=\"prevMonthPreview()\" _v-29b8b991=\"\">&lt;</div>\n            <div class=\"year-month-box\" _v-29b8b991=\"\">\n                <div class=\"year-box\" @click=\"chType('year')\" v-text=\"tmpYear\" _v-29b8b991=\"\"></div>\n                <div class=\"month-box\" @click=\"chType('month')\" v-text=\"tmpMonth + 1 | month language\" _v-29b8b991=\"\"></div>\n            </div>\n            <div class=\"arrow-right\" @click=\"nextMonthPreview()\" _v-29b8b991=\"\">&gt;</div>\n        </div>\n        <div class=\"panel-header\" v-show=\"panelType === 'year'\" _v-29b8b991=\"\">\n            <div class=\"arrow-left\" @click=\"chYearRange(0)\" _v-29b8b991=\"\">&lt;</div>\n            <div class=\"year-range\" _v-29b8b991=\"\">\n                <span v-text=\"yearList[0]\" _v-29b8b991=\"\"></span> - <span v-text=\"yearList[yearList.length - 1]\" _v-29b8b991=\"\"></span>\n            </div>\n            <div class=\"arrow-right\" @click=\"chYearRange(1)\" _v-29b8b991=\"\">&gt;</div>\n        </div>\n        <div class=\"type-year\" v-show=\"panelType === 'year'\" _v-29b8b991=\"\">\n            <ul class=\"year-list\" _v-29b8b991=\"\">\n                <li v-for=\"item in yearList\" v-text=\"item\" :class=\"{selected: isSelected('year', item), invalid: validateYear(item)}\" @click=\"selectYear(item)\" _v-29b8b991=\"\">\n                </li>\n            </ul>\n        </div>\n        <div class=\"type-month\" v-show=\"panelType === 'month'\" _v-29b8b991=\"\">\n            <ul class=\"month-list\" _v-29b8b991=\"\">\n                <li v-for=\"item in monthList\" v-text=\"item | month language\" :class=\"{selected: isSelected('month', $index), invalid: validateMonth($index)}\" @click=\"selectMonth($index)\" _v-29b8b991=\"\">\n                </li>\n            </ul>\n        </div>\n        <div class=\"type-date\" v-show=\"panelType === 'date'\" _v-29b8b991=\"\">\n            <ul class=\"weeks\" _v-29b8b991=\"\">\n                <li v-for=\"item in weekList\" v-text=\"item | week language\" _v-29b8b991=\"\"></li>\n            </ul>\n            <ul class=\"date-list\" _v-29b8b991=\"\">\n                <li v-for=\"item in dateList\" v-text=\"item.value\" :class=\"{preMonth: item.previousMonth, nextMonth: item.nextMonth,\n                        selected: isSelected('date', item), invalid: validateDate(item)}\" @click=\"selectDate(item)\" _v-29b8b991=\"\">\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }
 /******/ ])
