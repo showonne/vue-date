@@ -41,7 +41,7 @@
         margin: 0 auto;
         border: 1px solid #ccc;
         padding: 10px;
-        min-height: 880px;
+        min-height: 1280px;
         box-sizing: border-box;
     }
     .picker{
