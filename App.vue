@@ -16,7 +16,7 @@
         <hr/>
         <h2>Range selector in single datepicker.</h2>
         <datepicker language="ch" :value.sync="range" class="picker picker-range" :min.sync="start" max="2020-01-08" :range=true></datepicker>
-        <h5>The range is from <b>{{range[0]}}</b> to <b>{{range[1]}}</b> && the sync value is a Array: <b>[{{range[0]}}, {{range[1]}}]</b></h5>
+        <h5>The range is from <b>{{range[0]}}</b> to <b>{{range[1]}}</b> && the sync value is an Array: <b>[{{range[0]}}, {{range[1]}}]</b></h5>
     </div>
 </template>
 
