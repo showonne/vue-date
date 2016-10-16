@@ -69,6 +69,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
 	__webpack_require__(2)
 	__vue_script__ = __webpack_require__(6)
 	if (__vue_script__ &&
@@ -78,9 +79,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	__vue_template__ = __webpack_require__(60)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
 	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	__vue_options__.template = __vue_template__
 	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
@@ -428,6 +435,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
+	    name: 'Datepicker',
 	    data: function data() {
 	        var now = new Date();
 	        return {
@@ -445,6 +453,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            tmpEndYear: now.getFullYear(),
 	            tmpEndMonth: now.getMonth(),
 	            tmpEndDate: now.getDate(),
+	            minYear: Number,
+	            minMonth: Number,
+	            minDate: Number,
+	            maxYear: Number,
+	            maxMonth: Number,
+	            maxDate: Number,
 	            yearList: (0, _from2.default)({ length: 12 }, function (value, index) {
 	                return new Date().getFullYear() + index;
 	            }),
@@ -458,13 +472,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        language: { default: 'en' },
 	        min: { default: '1970-01-01' },
 	        max: { default: '3016-01-01' },
-	        minYear: Number,
-	        minMonth: Number,
-	        minDate: Number,
-	        maxYear: Number,
-	        maxMonth: Number,
-	        maxDate: Number,
-	        value: [String, Array],
+	        value: {
+	            type: [String, Array],
+	            default: ''
+	        },
 	        range: {
 	            type: Boolean,
 	            default: false
@@ -550,7 +561,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _this.year = _this.tmpYear;
 	                    _this.month = _this.tmpMonth;
 	                    _this.date = date.value;
-	                    _this.value = _this.tmpYear + '-' + ('0' + (_this.month + 1)).slice(-2) + '-' + ('0' + _this.date).slice(-2);
+	                    var value = _this.tmpYear + '-' + ('0' + (_this.month + 1)).slice(-2) + '-' + ('0' + _this.date).slice(-2);
+	                    _this.$emit('input', value);
 	                    _this.panelState = false;
 	                } else if (_this.range && !_this.rangeStart) {
 
@@ -586,7 +598,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    var RangeStart = _this.tmpStartYear + '-' + ('0' + (_this.tmpStartMonth + 1)).slice(-2) + '-' + ('0' + _this.tmpStartDate).slice(-2);
 	                    var RangeEnd = _this.tmpEndYear + '-' + ('0' + (_this.tmpEndMonth + 1)).slice(-2) + '-' + ('0' + _this.tmpEndDate).slice(-2);
 
-	                    _this.value = [RangeStart, RangeEnd];
+	                    var _value = [RangeStart, RangeEnd];
+	                    _this.$emit('input', _value);
 
 	                    _this.rangeStart = false;
 	                    _this.panelState = false;
@@ -680,37 +693,41 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    },
-	    ready: function ready() {
-	        if (this.$el.parentNode.offsetWidth + this.$el.parentNode.offsetLeft - this.$el.offsetLeft <= 300) {
-	            this.coordinates = { right: '0', top: window.getComputedStyle(this.$el.children[0]).offsetHeight + 4 + 'px' };
-	        } else {
-	            this.coordinates = { left: '0', top: window.getComputedStyle(this.$el.children[0]).offsetHeight + 4 + 'px' };
-	        }
-	        var minArr = this.min.split('-');
-	        this.minYear = Number(minArr[0]);
-	        this.minMonth = Number(minArr[1]);
-	        this.minDate = Number(minArr[2]);
+	    mounted: function mounted() {
+	        var _this2 = this;
 
-	        var maxArr = this.max.split('-');
-	        this.maxYear = Number(maxArr[0]);
-	        this.maxMonth = Number(maxArr[1]);
-	        this.maxDate = Number(maxArr[2]);
+	        this.$nextTick(function () {
+	            if (_this2.$el.parentNode.offsetWidth + _this2.$el.parentNode.offsetLeft - _this2.$el.offsetLeft <= 300) {
+	                _this2.coordinates = { right: '0', top: window.getComputedStyle(_this2.$el.children[0]).offsetHeight + 4 + 'px' };
+	            } else {
+	                _this2.coordinates = { left: '0', top: window.getComputedStyle(_this2.$el.children[0]).offsetHeight + 4 + 'px' };
+	            }
+	            var minArr = _this2.min.split('-');
+	            _this2.minYear = Number(minArr[0]);
+	            _this2.minMonth = Number(minArr[1]);
+	            _this2.minDate = Number(minArr[2]);
 
-	        if (this.range) {
-	            var rangeStart = this.value[0].split('-');
-	            var rangeEnd = this.value[1].split('-');
-	            this.tmpStartYear = Number(rangeStart[0]);
-	            this.tmpStartMonth = Number(rangeStart[1]) - 1;
-	            this.tmpStartDate = Number(rangeStart[2]);
+	            var maxArr = _this2.max.split('-');
+	            _this2.maxYear = Number(maxArr[0]);
+	            _this2.maxMonth = Number(maxArr[1]);
+	            _this2.maxDate = Number(maxArr[2]);
 
-	            this.tmpEndYear = Number(rangeEnd[0]);
-	            this.tmpEndMonth = Number(rangeEnd[1]) - 1;
-	            this.tmpEndDate = Number(rangeEnd[2]);
-	        }
-	        if (!this.value) {
-	            this.value = this.tmpYear + '-' + ('0' + (this.month + 1)).slice(-2) + '-' + ('0' + this.date).slice(-2);
-	        }
-	        window.addEventListener('click', this.close);
+	            if (_this2.range) {
+	                var rangeStart = _this2.value[0].split('-');
+	                var rangeEnd = _this2.value[1].split('-');
+	                _this2.tmpStartYear = Number(rangeStart[0]);
+	                _this2.tmpStartMonth = Number(rangeStart[1]) - 1;
+	                _this2.tmpStartDate = Number(rangeStart[2]);
+
+	                _this2.tmpEndYear = Number(rangeEnd[0]);
+	                _this2.tmpEndMonth = Number(rangeEnd[1]) - 1;
+	                _this2.tmpEndDate = Number(rangeEnd[2]);
+	            }
+	            if (!_this2.value) {
+	                _this2.value = _this2.tmpYear + '-' + ('0' + (_this2.month + 1)).slice(-2) + '-' + ('0' + _this2.date).slice(-2);
+	            }
+	            window.addEventListener('click', _this2.close);
+	        });
 	    },
 	    beforeDestroy: function beforeDestroy() {
 	        window.removeEventListener('click', this.close);
@@ -1593,7 +1610,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 60 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"date-picker\" _v-29b8b991=\"\">\n    <div class=\"input\" type=\"text\" @click=\"togglePanel\" v-text=\"range ? value[0] + ' -- ' + value[1] : value\" _v-29b8b991=\"\"></div>\n    <div class=\"date-panel\" v-show=\"panelState\" :style=\"coordinates\" transition=\"toggle\" _v-29b8b991=\"\">\n        <div class=\"panel-header\" v-show=\"panelType !== 'year'\" _v-29b8b991=\"\">\n            <div class=\"arrow-left\" @click=\"prevMonthPreview()\" _v-29b8b991=\"\">&lt;</div>\n            <div class=\"year-month-box\" _v-29b8b991=\"\">\n                <div class=\"year-box\" @click=\"chType('year')\" v-text=\"tmpYear\" _v-29b8b991=\"\"></div>\n                <div class=\"month-box\" @click=\"chType('month')\" v-text=\"tmpMonth + 1 | month language\" _v-29b8b991=\"\"></div>\n            </div>\n            <div class=\"arrow-right\" @click=\"nextMonthPreview()\" _v-29b8b991=\"\">&gt;</div>\n        </div>\n        <div class=\"panel-header\" v-show=\"panelType === 'year'\" _v-29b8b991=\"\">\n            <div class=\"arrow-left\" @click=\"chYearRange(0)\" _v-29b8b991=\"\">&lt;</div>\n            <div class=\"year-range\" _v-29b8b991=\"\">\n                <span v-text=\"yearList[0]\" _v-29b8b991=\"\"></span> - <span v-text=\"yearList[yearList.length - 1]\" _v-29b8b991=\"\"></span>\n            </div>\n            <div class=\"arrow-right\" @click=\"chYearRange(1)\" _v-29b8b991=\"\">&gt;</div>\n        </div>\n        <div class=\"type-year\" v-show=\"panelType === 'year'\" _v-29b8b991=\"\">\n            <ul class=\"year-list\" _v-29b8b991=\"\">\n                <li v-for=\"item in yearList\" v-text=\"item\" :class=\"{selected: isSelected('year', item), invalid: validateYear(item)}\" @click=\"selectYear(item)\" _v-29b8b991=\"\">\n                </li>\n            </ul>\n        </div>\n        <div class=\"type-month\" v-show=\"panelType === 'month'\" _v-29b8b991=\"\">\n            <ul class=\"month-list\" _v-29b8b991=\"\">\n                <li v-for=\"item in monthList\" v-text=\"item | month language\" :class=\"{selected: isSelected('month', $index), invalid: validateMonth($index)}\" @click=\"selectMonth($index)\" _v-29b8b991=\"\">\n                </li>\n            </ul>\n        </div>\n        <div class=\"type-date\" v-show=\"panelType === 'date'\" _v-29b8b991=\"\">\n            <ul class=\"weeks\" _v-29b8b991=\"\">\n                <li v-for=\"item in weekList\" v-text=\"item | week language\" _v-29b8b991=\"\"></li>\n            </ul>\n            <ul class=\"date-list\" _v-29b8b991=\"\">\n                <li v-for=\"item in dateList\" v-text=\"item.value\" :class=\"{preMonth: item.previousMonth, nextMonth: item.nextMonth,\n                        selected: isSelected('date', item), invalid: validateDate(item)}\" @click=\"selectDate(item)\" _v-29b8b991=\"\">\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"date-picker\" _v-29b8b991=\"\">\n    <div class=\"input\" type=\"text\" @click=\"togglePanel\" v-text=\"range ? value[0] + ' -- ' + value[1] : value\" _v-29b8b991=\"\"></div>\n    <div class=\"date-panel\" v-show=\"panelState\" :style=\"coordinates\" transition=\"toggle\" _v-29b8b991=\"\">\n        <div class=\"panel-header\" v-show=\"panelType !== 'year'\" _v-29b8b991=\"\">\n            <div class=\"arrow-left\" @click=\"prevMonthPreview()\" _v-29b8b991=\"\">&lt;</div>\n            <div class=\"year-month-box\" _v-29b8b991=\"\">\n                <div class=\"year-box\" @click=\"chType('year')\" v-text=\"tmpYear\" _v-29b8b991=\"\"></div>\n                <div class=\"month-box\" @click=\"chType('month')\" v-text=\"tmpMonth + 1 \" _v-29b8b991=\"\"></div>\n            </div>\n            <div class=\"arrow-right\" @click=\"nextMonthPreview()\" _v-29b8b991=\"\">&gt;</div>\n        </div>\n        <div class=\"panel-header\" v-show=\"panelType === 'year'\" _v-29b8b991=\"\">\n            <div class=\"arrow-left\" @click=\"chYearRange(0)\" _v-29b8b991=\"\">&lt;</div>\n            <div class=\"year-range\" _v-29b8b991=\"\">\n                <span v-text=\"yearList[0]\" _v-29b8b991=\"\"></span> - <span v-text=\"yearList[yearList.length - 1]\" _v-29b8b991=\"\"></span>\n            </div>\n            <div class=\"arrow-right\" @click=\"chYearRange(1)\" _v-29b8b991=\"\">&gt;</div>\n        </div>\n        <div class=\"type-year\" v-show=\"panelType === 'year'\" _v-29b8b991=\"\">\n            <ul class=\"year-list\" _v-29b8b991=\"\">\n                <li v-for=\"item in yearList\" v-text=\"item\" :class=\"{selected: isSelected('year', item), invalid: validateYear(item)}\" @click=\"selectYear(item)\" _v-29b8b991=\"\">\n                </li>\n            </ul>\n        </div>\n        <div class=\"type-month\" v-show=\"panelType === 'month'\" _v-29b8b991=\"\">\n            <ul class=\"month-list\" _v-29b8b991=\"\">\n                <li v-for=\"(item, index) in monthList\" v-text=\"item\" :class=\"{selected: isSelected('month', index), invalid: validateMonth(index)}\" @click=\"selectMonth(index)\" _v-29b8b991=\"\">\n                </li>\n            </ul>\n        </div>\n        <div class=\"type-date\" v-show=\"panelType === 'date'\" _v-29b8b991=\"\">\n            <ul class=\"weeks\" _v-29b8b991=\"\">\n                <li v-for=\"item in weekList\" v-text=\"item\" _v-29b8b991=\"\"></li>\n            </ul>\n            <ul class=\"date-list\" _v-29b8b991=\"\">\n                <li v-for=\"item in dateList\" v-text=\"item.value\" :class=\"{preMonth: item.previousMonth, nextMonth: item.nextMonth,\n                        selected: isSelected('date', item), invalid: validateDate(item)}\" @click=\"selectDate(item)\" _v-29b8b991=\"\">\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }
 /******/ ])
