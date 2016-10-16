@@ -1,4 +1,34 @@
-<template>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+    <script src="vue-datepicker.js"></script>
+    <style>
+        #app{
+            width: 750px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            min-height: 1280px;
+            box-sizing: border-box;
+        }
+        .picker{
+            width: 200px;
+        }
+        .range{
+            display: flex;
+            justify-content: space-around;
+        }
+        b{
+            font-weight: 800;
+            font-size: 16px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
     <div id="app">
         <h2>Select Date:</h2>
         <datepicker v-model="selected" class="picker"></datepicker>
@@ -19,47 +49,17 @@
         </datepicker>
         <h5>The range is from <b>{{range[0]}}</b> to <b>{{range[1]}}</b> && the sync value is an Array: <b>[{{range[0]}}, {{range[1]}}]</b></h5>
     </div>
-</template>
-
-<script>
-    import datepicker from './Datepicker.vue'
-    export default {
-        data () {
-            return {
+    <script>
+        new Vue({
+            el: '#app',
+            components: { datepicker },
+            data: {
                 selected: '2016-08-03',
                 start: '2016-01-01',
                 end: '2015-11-01',
                 range: ['2016-08-12', '2016-09-20']
             }
-        },
-        methods: {
-            change(key, value) {
-                console.log(key, value)
-            }
-        },
-        components: { datepicker }
-    }
-</script>
-
-<style>
-    #app{
-        width: 750px;
-        margin: 0 auto;
-        border: 1px solid #ccc;
-        padding: 10px;
-        min-height: 1280px;
-        box-sizing: border-box;
-    }
-    .picker{
-        width: 200px;
-    }
-    .range{
-        display: flex;
-        justify-content: space-around;
-    }
-    b{
-        font-weight: 800;
-        font-size: 16px;
-        color: red;
-    }
-</style>
+        })
+    </script>
+</body>
+</html>

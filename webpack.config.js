@@ -16,6 +16,11 @@ module.exports = {
             {test: /\.js$/, exclude: /node_modules/, loaders: ['babel']}
         ]
     },
+    resolve: {
+        alias: {
+            'vue': 'vue/dist/vue.js'
+        }
+    },
     plugins: [
             new htmlWebpackPlugin({
                 template: './index.html'
