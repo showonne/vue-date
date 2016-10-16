@@ -1,3 +1,8 @@
-import datepicker from './Datepicker.vue'
+import Vue from 'vue'
 
-module.exports = datepicker
+import App from './App.vue'
+
+new Vue({
+    el: '#app',
+    render: h => h(App)
+})
