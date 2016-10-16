@@ -13,7 +13,7 @@ use with single `.vue` file:
     <script>
         import datepicker from 'path/to/datepicker.vue'
         export default {
-            components: { datepicker}
+            components: { datepicker }
         }
     </script>
 
