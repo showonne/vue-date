@@ -6,7 +6,7 @@
                 <div class="arrow-left" @click="prevMonthPreview()">&lt;</div>
                 <div class="year-month-box">
                     <div class="year-box" @click="chType('year')" v-text="tmpYear"></div>
-                    <div class="month-box" @click="chType('month')" v-text="tmpMonth + 1 | month language"></div>
+                    <div class="month-box" @click="chType('month')" v-text="tmpMonth + 1 "></div>
                 </div>
                 <div class="arrow-right" @click="nextMonthPreview()">&gt;</div>
             </div>
@@ -29,17 +29,17 @@
             </div>
             <div class="type-month" v-show="panelType === 'month'">
                 <ul class="month-list">
-                    <li v-for="item in monthList"
-                        v-text="item | month language"
-                        :class="{selected: isSelected('month', $index), invalid: validateMonth($index)}" 
-                        @click="selectMonth($index)"
+                    <li v-for="(item, index) in monthList"
+                        v-text="item"
+                        :class="{selected: isSelected('month', index), invalid: validateMonth(index)}" 
+                        @click="selectMonth(index)"
                     >
                     </li>
                 </ul>
             </div>
             <div class="type-date" v-show="panelType === 'date'">
                 <ul class="weeks">
-                    <li v-for="item in weekList" v-text="item | week language"></li>
+                    <li v-for="item in weekList" v-text="item"></li>
                 </ul>
                 <ul class="date-list">
                     <li v-for="item in dateList"
@@ -73,6 +73,12 @@
                 tmpEndYear: now.getFullYear(),
                 tmpEndMonth: now.getMonth(),
                 tmpEndDate: now.getDate(),
+                minYear: Number,
+                minMonth: Number,
+                minDate: Number,
+                maxYear: Number,
+                maxMonth: Number,
+                maxDate: Number,
                 yearList: Array.from({length: 12}, (value, index) => new Date().getFullYear() + index),
                 monthList: [1, 2, 3 ,4 ,5, 6, 7 ,8, 9, 10, 11, 12],
                 weekList: [0, 1, 2, 3, 4, 5, 6],
@@ -83,13 +89,10 @@
             language: {default: 'en'},
             min: {default: '1970-01-01'},
             max: {default: '3016-01-01'},
-            minYear: Number,
-            minMonth: Number,
-            minDate: Number,
-            maxYear: Number,
-            maxMonth: Number,
-            maxDate: Number,
-            value: [String, Array],
+            value: {
+                type: [String, Array],
+                default: ''
+            },
             range: {
                 type: Boolean,
                 default: false
@@ -172,7 +175,8 @@
                         this.year = this.tmpYear
                         this.month = this.tmpMonth
                         this.date = date.value
-                        this.value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
+                        let value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
+                        this.$emit('input', value)
                         this.panelState = false
 
                     }else if(this.range && !this.rangeStart){
@@ -208,7 +212,8 @@
                         let RangeStart = `${this.tmpStartYear}-${('0' + (this.tmpStartMonth + 1)).slice(-2)}-${('0' + this.tmpStartDate).slice(-2)}`
                         let RangeEnd = `${this.tmpEndYear}-${('0' + (this.tmpEndMonth + 1)).slice(-2)}-${('0' + this.tmpEndDate).slice(-2)}`
 
-                        this.value = [RangeStart, RangeEnd]
+                        let value = [RangeStart, RangeEnd]
+                        this.$emit('input', value)
 
                         this.rangeStart = false
                         this.panelState = false
@@ -304,37 +309,39 @@
                 }
             }
         },
-        ready () {
-            if(this.$el.parentNode.offsetWidth + this.$el.parentNode.offsetLeft - this.$el.offsetLeft <= 300){
-                this.coordinates = {right: '0', top: `${window.getComputedStyle(this.$el.children[0]).offsetHeight + 4}px`}
-            }else{
-                this.coordinates = {left: '0', top: `${window.getComputedStyle(this.$el.children[0]).offsetHeight + 4}px`}
-            }
-            let minArr = this.min.split('-')
-            this.minYear = Number(minArr[0])
-            this.minMonth = Number(minArr[1])
-            this.minDate = Number(minArr[2])
+        mounted () {
+            this.$nextTick(() => {
+                if(this.$el.parentNode.offsetWidth + this.$el.parentNode.offsetLeft - this.$el.offsetLeft <= 300){
+                    this.coordinates = {right: '0', top: `${window.getComputedStyle(this.$el.children[0]).offsetHeight + 4}px`}
+                }else{
+                    this.coordinates = {left: '0', top: `${window.getComputedStyle(this.$el.children[0]).offsetHeight + 4}px`}
+                }
+                let minArr = this.min.split('-')
+                this.minYear = Number(minArr[0])
+                this.minMonth = Number(minArr[1])
+                this.minDate = Number(minArr[2])
 
-            let maxArr = this.max.split('-')
-            this.maxYear = Number(maxArr[0])
-            this.maxMonth = Number(maxArr[1])
-            this.maxDate = Number(maxArr[2])
+                let maxArr = this.max.split('-')
+                this.maxYear = Number(maxArr[0])
+                this.maxMonth = Number(maxArr[1])
+                this.maxDate = Number(maxArr[2])
 
-            if(this.range){
-                let rangeStart = this.value[0].split('-')
-                let rangeEnd = this.value[1].split('-')
-                this.tmpStartYear = Number(rangeStart[0])
-                this.tmpStartMonth = Number(rangeStart[1]) - 1
-                this.tmpStartDate = Number(rangeStart[2])
+                if(this.range){
+                    let rangeStart = this.value[0].split('-')
+                    let rangeEnd = this.value[1].split('-')
+                    this.tmpStartYear = Number(rangeStart[0])
+                    this.tmpStartMonth = Number(rangeStart[1]) - 1
+                    this.tmpStartDate = Number(rangeStart[2])
 
-                this.tmpEndYear = Number(rangeEnd[0])
-                this.tmpEndMonth = Number(rangeEnd[1]) - 1
-                this.tmpEndDate = Number(rangeEnd[2])
-            }
-            if(!this.value){
-                this.value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
-            }
-            window.addEventListener('click', this.close)
+                    this.tmpEndYear = Number(rangeEnd[0])
+                    this.tmpEndMonth = Number(rangeEnd[1]) - 1
+                    this.tmpEndDate = Number(rangeEnd[2])
+                }
+                if(!this.value){
+                    this.value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
+                }
+                window.addEventListener('click', this.close)
+            })
         },
         beforeDestroy () {
             window.removeEventListener('click', this.close)
