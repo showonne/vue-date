@@ -7,7 +7,7 @@ Live Demo is [here(browser)](http://www.showonne.com/vue-datepicker/dist/browser
 
 ##Usage
 
-use with single `.vue` file:
+####use with single `.vue` file:
 
 ```html
 <template>
@@ -27,8 +27,9 @@ use with single `.vue` file:
         components: { datepicker }
     }
 </script>
+```
 
-use in browser:
+####use in browser:
 ```html
 //index.html
 <html>
