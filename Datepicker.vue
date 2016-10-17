@@ -30,16 +30,16 @@
             <div class="type-month" v-show="panelType === 'month'">
                 <ul class="month-list">
                     <li v-for="(item, index) in monthList"
-                        v-text="item"
                         :class="{selected: isSelected('month', index), invalid: validateMonth(index)}" 
                         @click="selectMonth(index)"
                     >
+                        {{item | month(language)}}
                     </li>
                 </ul>
             </div>
             <div class="type-date" v-show="panelType === 'date'">
                 <ul class="weeks">
-                    <li v-for="item in weekList" v-text="item"></li>
+                    <li v-for="item in weekList">{{item | week(language)}}</li>
                 </ul>
                 <ul class="date-list">
                     <li v-for="item in dateList"
@@ -286,7 +286,7 @@
             }
         },
         filters: {
-            week (item, lang) {
+            week: (item, lang) => {
                 switch (lang) {
                     case 'en':
                         return {0: 'Su', 1: 'Mo', 2: 'Tu', 3: 'We', 4: 'Th', 5: 'Fr', 6: 'Sa'}[item]
@@ -296,7 +296,7 @@
                         return item
                 }
             },
-            month (item, lang) {
+            month: (item, lang) => {
                 switch (lang) {
                     case 'en':
                         return {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
