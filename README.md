@@ -9,45 +9,44 @@ Live Demo is [here(browser)](http://www.showonne.com/vue-datepicker/dist/browser
 
 use with single `.vue` file:
 
-    html
-    //App.vue
-    <template>
-        <div>
+```html
+<template>
+    <div>
+        <datepicker v-model="date"></datepicker>
+    </div>
+</template>
+
+<script>
+    import datepicker from 'path/to/datepicker.vue'
+    export default {
+        data() {
+            return {
+                date: '2016-10-16'
+            }
+        },
+        components: { datepicker }
+    }
+</script>
+
+```
+use in browser:
+//index.html
+<html>
+    <script src="path/to/vue.js"></script>
+    <script src="path/to/datepicker.js"></script>
+    <body>
+        <div id="app">
             <datepicker v-model="date"></datepicker>
         </div>
-    </template>
-    
-    <script>
-        import datepicker from 'path/to/datepicker.vue'
-        export default {
-            data() {
-                return {
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
                     date: '2016-10-16'
-                }
-            },
-            components: { datepicker }
-        }
-    </script>
-
-use in browser:
-
-    html
-    //index.html
-    <html>
-        <script src="path/to/vue.js"></script>
-        <script src="path/to/datepicker.js"></script>
-        <body>
-            <div id="app">
-                <datepicker v-model="date"></datepicker>
-            </div>
-            <script>
-                new Vue({
-                    el: '#app',
-                    data: {
-                        date: '2016-10-16'
-                    },
-                    components: { datepicker }
-                })
-            </script>
-        </body>
-    </html>
+                },
+                components: { datepicker }
+            })
+        </script>
+    </body>
+</html>
+```
