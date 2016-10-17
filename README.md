@@ -9,6 +9,7 @@ Live Demo is [here(browser)](http://www.showonne.com/vue-datepicker/dist/browser
 
 use with single `.vue` file:
 
+    html
     //App.vue
     <template>
         <div>
@@ -30,6 +31,7 @@ use with single `.vue` file:
 
 use in browser:
 
+    html
     //index.html
     <html>
         <script src="path/to/vue.js"></script>
