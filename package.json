@@ -24,8 +24,11 @@
     "less-loader": "^2.2.3",
     "vue-hot-reload-api": "^2.0.5",
     "vue-html-loader": "^1.2.3",
-    "vue-loader": "^8.5.3",
+    "vue-loader": "^9.7.0",
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "vue": "^2.0.3"
   }
 }
