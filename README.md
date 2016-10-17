@@ -28,8 +28,8 @@ use with single `.vue` file:
     }
 </script>
 
-```
 use in browser:
+```html
 //index.html
 <html>
     <script src="path/to/vue.js"></script>
