@@ -24,6 +24,7 @@
 <script>
     import datepicker from './Datepicker.vue'
     export default {
+        name: 'Demo',
         data () {
             return {
                 selected: '2016-08-03',

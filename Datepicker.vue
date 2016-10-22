@@ -6,7 +6,7 @@
                 <div class="arrow-left" @click="prevMonthPreview()">&lt;</div>
                 <div class="year-month-box">
                     <div class="year-box" @click="chType('year')" v-text="tmpYear"></div>
-                    <div class="month-box" @click="chType('month')" v-text="tmpMonth + 1 "></div>
+                    <div class="month-box" @click="chType('month')">{{tmpMonth + 1 | month(language)}}</div>
                 </div>
                 <div class="arrow-right" @click="nextMonthPreview()">&gt;</div>
             </div>
@@ -42,11 +42,13 @@
                     <li v-for="item in weekList">{{item | week(language)}}</li>
                 </ul>
                 <ul class="date-list">
-                    <li v-for="item in dateList"
-                        v-text="item.value" 
+                    <li v-for="(item, index) in dateList"
                         :class="{preMonth: item.previousMonth, nextMonth: item.nextMonth,
-                            selected: isSelected('date', item), invalid: validateDate(item)}"
+                            invalid: validateDate(item), firstItem: (index % 7) === 0}"
                         @click="selectDate(item)">
+                        <div class="message" :class="{selected: isSelected('date', item)}">
+                            <div class="bg"></div><span v-text="item.value"></span>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -374,27 +376,25 @@
         z-index: 5000;
         border: 1px solid #eee;
         box-sizing: border-box;
-        width: 300px;
+        width: 320px;
+        padding: 5px 10px 10px;
+        box-sizing: border-box;
+        background-color: #fff;
     }
     .panel-header{
         display: flex;
         flex-flow: row nowrap;
-        background-color: #8099fc;
         width: 100%;
     }
     .arrow-left, .arrow-right{
         flex: 1;
         font-size: 20px;
         line-height: 2;
-        color: #fff;
+        background-color: #fff;
         text-align: center;
         cursor: pointer;
-        &:hover{
-            background-color: #3f51b5;
-        }
     }
     .year-range{
-        color: #fff;
         font-size: 20px;
         line-height: 2;
         flex: 3;
@@ -410,40 +410,36 @@
     .type-year, .type-month, .date-list{
         background-color: #fff;
     }
+
     .year-box, .month-box{
         transition: all ease .1s;
-        color: #fff;
+        font-family: Roboto, sans-serif;
         flex: 1;
         text-align: center;
         font-size: 20px;
         line-height: 2;
         cursor: pointer;
-        &:hover{
-            background-color: #3f51b5;
-        }
+        background-color: #fff;
     }
     .year-list, .month-list{
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
         li{
-            transition: all ease .1s;
+            font-family: Roboto, sans-serif;
+            transition: all .45s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
             cursor: pointer;
             text-align: center;
             font-size: 20px;
             width: 33%;
             padding: 10px 0;
-            &:not(.invalid) {
-                &:hover{
-                    background-color: #eee;
-                }
+            &:hover{
+                background-color: #6ac1c9;
+                color: #fff;
             }
             &.selected{
-                background-color: #e04831;
+                background-color: #0097a7;
                 color: #fff;
-                &:hover{
-                    background-color: #f79bab;
-                }
             }
             &.invalid{
                 cursor: not-allowed;
@@ -463,16 +459,57 @@
             cursor: pointer;
             box-sizing: border-box;
             border-bottom: 1px solid #fff;
-            &:not(.invalid){
-                &:hover{
-                    background-color: #eee;
-                }
+            position: relative;
+            margin: 2px;
+            &:not(.firstItem){
+                margin-left: 10px;
             }
-            &.selected{
-                background-color: #e04831;
-                color: #fff;
-                &:hover{
-                    background-color: #f79bab;
+            .message{
+                font-family: Roboto, sans-serif;
+                font-weight: 300;
+                font-size: 14px;
+                position: relative;
+                height: 30px;
+                &.selected{
+                    .bg{
+                        background-color: rgb(0, 151, 167);
+                    }
+                    span{
+                        color: #fff;
+                    }
+                }
+                &:not(.selected){
+                    .bg{
+                        transform: scale(0);
+                        opacity: 0;
+                    }
+                    &:hover{
+                        .bg{
+                            background-color: rgb(0, 151, 167);
+                            transform: scale(1);
+                            opacity: .6;
+                        }
+                        span{
+                            color: #fff;
+                        }
+                    }
+                }
+                .bg{
+                    height: 30px;
+                    width: 100%;
+                    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+                    border-radius: 50%;
+                    position: absolute;
+                    z-index: 10;
+                    top: 0;
+                    left: 0;
+                }
+                span{
+                    position: absolute;
+                    z-index: 20;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate3d(-50%, -50%, 0);
                 }
             }
             &.invalid{
@@ -483,7 +520,6 @@
         
     }
     .weeks{
-        background-color: #eee;
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
@@ -499,7 +535,7 @@
         }
         li{
             font-family: Roboto;
-            width: 14%;
+            width: 30px;
             height: 30px;
             text-align: center;
             line-height: 30px;

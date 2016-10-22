@@ -22,10 +22,10 @@ module.exports = {
         }
     },
     plugins: [
-            new htmlWebpackPlugin({
-                template: './index.html'
-            }),
-            new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
-            new webpack.optimize.UglifyJsPlugin({minimize: true})
+            // new htmlWebpackPlugin({
+            //     template: './index.html'
+            // }),
+            // new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+            // new webpack.optimize.UglifyJsPlugin({minimize: true})
         ]
 }
