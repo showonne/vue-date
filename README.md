@@ -7,43 +7,48 @@ Live Demo is [here(browser)](http://www.showonne.com/vue-datepicker/dist/browser
 
 ##Usage
 
+
 use with single `.vue` file:
 
-    //App.vue
-    <template>
-        <datepicker :value.sync="date" ></datepicker>
-    </template>
-    
-    <script>
-        import datepicker from 'path/to/datepicker.vue'
-        export default {
-            data() {
-                return {
-                    date: '2016-10-16'
-                }
-            },
-            components: { datepicker }
-        }
-    </script>
+```html
+//App.vue
+<template>
+    <datepicker :value.sync="date" ></datepicker>
+</template>
+
+<script>
+    import datepicker from 'path/to/datepicker.vue'
+    export default {
+        data() {
+            return {
+                date: '2016-10-16'
+            }
+        },
+        components: { datepicker }
+    }
+</script>
+```
 
 use in browser:
 
-    //index.html
-    <html>
-        <script src="path/to/vue.js"></script>
-        <script src="path/to/datepicker.js"></script>
-        <body>
-            <div id="app">
-                <datepicker :value.sync="date" ></datepicker>
-            </div>
-            <script>
-                new Vue({
-                    el: '#app',
-                    data: {
-                        date: '2016-10-16'
-                    },
-                    components: { datepicker }
-                })
-            </script>
-        </body>
-    </html>
+```html
+//index.html
+<html>
+    <script src="path/to/vue.js"></script>
+    <script src="path/to/datepicker.js"></script>
+    <body>
+        <div id="app">
+            <datepicker :value.sync="date" ></datepicker>
+        </div>
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    date: '2016-10-16'
+                },
+                components: { datepicker }
+            })
+        </script>
+    </body>
+</html>
+```
