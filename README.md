@@ -9,27 +9,32 @@ Live Demo is [here(browser)](http://www.showonne.com/vue-datepicker/dist/browser
 
 use with single `.vue` file:
 
-    //App.vue
-    <script>
-        import datepicker from 'path/to/datepicker.vue'
-        export default {
-            components: { datepicker }
-        }
-    </script>
+
+```html
+//App.vue
+<script>
+    import datepicker from 'path/to/datepicker.vue'
+    export default {
+        components: { datepicker }
+    }
+</script>
+```
 
 use in browser:
 
-    //index.html
-    <html>
-        <script src="path/to/vue.js"></script>
-        <script src="path/to/datepicker.js"></script>
-        <body>
-            <div id="app"></div>
-            <script>
-                new Vue({
-                    el: '#app',
-                    components: { datepicker }
-                })
-            </script>
-        </body>
-    </html>
+```html
+//index.html
+<html>
+    <script src="path/to/vue.js"></script>
+    <script src="path/to/datepicker.js"></script>
+    <body>
+        <div id="app"></div>
+        <script>
+            new Vue({
+                el: '#app',
+                components: { datepicker }
+            })
+        </script>
+    </body>
+</html>
+```
