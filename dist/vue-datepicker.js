@@ -146,7 +146,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	// module
-	exports.push([module.id, "\nul[data-v-29b8b991] {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.date-picker[data-v-29b8b991] {\n  position: relative;\n}\n.input[data-v-29b8b991] {\n  width: 100%;\n  height: 100%;\n  font-size: inherit;\n  line-height: 2;\n  padding-left: 4px;\n  box-sizing: border-box;\n  outline: none;\n  border: 1px solid #ccc;\n  border-radius: 2px;\n}\n.date-panel[data-v-29b8b991] {\n  position: absolute;\n  z-index: 5000;\n  border: 1px solid #eee;\n  width: 320px;\n  padding: 5px 10px 10px;\n  box-sizing: border-box;\n  background-color: #fff;\n}\n.panel-header[data-v-29b8b991] {\n  display: flex;\n  flex-flow: row nowrap;\n  width: 100%;\n}\n.arrow-left[data-v-29b8b991],\n.arrow-right[data-v-29b8b991] {\n  flex: 1;\n  font-size: 20px;\n  line-height: 2;\n  background-color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.year-range[data-v-29b8b991] {\n  font-size: 20px;\n  line-height: 2;\n  flex: 3;\n  display: flex;\n  justify-content: center;\n}\n.year-month-box[data-v-29b8b991] {\n  flex: 3;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: space-around;\n}\n.type-year[data-v-29b8b991],\n.type-month[data-v-29b8b991],\n.date-list[data-v-29b8b991] {\n  background-color: #fff;\n}\n.year-box[data-v-29b8b991],\n.month-box[data-v-29b8b991] {\n  transition: all ease .1s;\n  font-family: Roboto, sans-serif;\n  flex: 1;\n  text-align: center;\n  font-size: 20px;\n  line-height: 2;\n  cursor: pointer;\n  background-color: #fff;\n}\n.year-list[data-v-29b8b991],\n.month-list[data-v-29b8b991] {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n}\n.year-list li[data-v-29b8b991],\n.month-list li[data-v-29b8b991] {\n  font-family: Roboto, sans-serif;\n  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1) 0ms;\n  cursor: pointer;\n  text-align: center;\n  font-size: 20px;\n  width: 33%;\n  padding: 10px 0;\n}\n.year-list li[data-v-29b8b991]:hover,\n.month-list li[data-v-29b8b991]:hover {\n  background-color: #6ac1c9;\n  color: #fff;\n}\n.year-list li.selected[data-v-29b8b991],\n.month-list li.selected[data-v-29b8b991] {\n  background-color: #0097a7;\n  color: #fff;\n}\n.year-list li.invalid[data-v-29b8b991],\n.month-list li.invalid[data-v-29b8b991] {\n  cursor: not-allowed;\n  color: #ccc;\n}\n.date-list[data-v-29b8b991] {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n}\n.date-list .valid[data-v-29b8b991]:hover {\n  background-color: #eee;\n}\n.date-list li[data-v-29b8b991] {\n  transition: all ease .1s;\n  cursor: pointer;\n  box-sizing: border-box;\n  border-bottom: 1px solid #fff;\n  position: relative;\n  margin: 2px;\n}\n.date-list li[data-v-29b8b991]:not(.firstItem) {\n  margin-left: 10px;\n}\n.date-list li .message[data-v-29b8b991] {\n  font-family: Roboto, sans-serif;\n  font-weight: 300;\n  font-size: 14px;\n  position: relative;\n  height: 30px;\n}\n.date-list li .message.selected .bg[data-v-29b8b991] {\n  background-color: #0097a7;\n}\n.date-list li .message.selected span[data-v-29b8b991] {\n  color: #fff;\n}\n.date-list li .message:not(.selected) .bg[data-v-29b8b991] {\n  transform: scale(0);\n  opacity: 0;\n}\n.date-list li .message:not(.selected):hover .bg[data-v-29b8b991] {\n  background-color: #0097a7;\n  transform: scale(1);\n  opacity: .6;\n}\n.date-list li .message:not(.selected):hover span[data-v-29b8b991] {\n  color: #fff;\n}\n.date-list li .message .bg[data-v-29b8b991] {\n  height: 30px;\n  width: 100%;\n  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;\n  border-radius: 50%;\n  position: absolute;\n  z-index: 10;\n  top: 0;\n  left: 0;\n}\n.date-list li .message span[data-v-29b8b991] {\n  position: absolute;\n  z-index: 20;\n  left: 50%;\n  top: 50%;\n  transform: translate3d(-50%, -50%, 0);\n}\n.date-list li.invalid[data-v-29b8b991] {\n  cursor: not-allowed;\n  color: #ccc;\n}\n.weeks[data-v-29b8b991] {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n}\n.weeks li[data-v-29b8b991] {\n  font-weight: 600;\n}\n.weeks[data-v-29b8b991],\n.date-list[data-v-29b8b991] {\n  width: 100%;\n  text-align: center;\n}\n.weeks .preMonth[data-v-29b8b991],\n.date-list .preMonth[data-v-29b8b991],\n.weeks .nextMonth[data-v-29b8b991],\n.date-list .nextMonth[data-v-29b8b991] {\n  color: #ccc;\n}\n.weeks li[data-v-29b8b991],\n.date-list li[data-v-29b8b991] {\n  font-family: Roboto;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n}\n.toggle-transition[data-v-29b8b991] {\n  transition: all ease .2s;\n}\n.toggle-enter[data-v-29b8b991],\n.toggle-leave[data-v-29b8b991] {\n  opacity: 0;\n}\n", ""]);
+	exports.push([module.id, "\nul[data-v-29b8b991] {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.date-picker[data-v-29b8b991] {\n  position: relative;\n}\n.input[data-v-29b8b991] {\n  width: 100%;\n  height: 100%;\n  font-size: inherit;\n  line-height: 2;\n  padding-left: 4px;\n  box-sizing: border-box;\n  outline: none;\n  border: 1px solid #ccc;\n  border-radius: 2px;\n}\n.date-panel[data-v-29b8b991] {\n  position: absolute;\n  z-index: 5000;\n  border: 1px solid #eee;\n  width: 320px;\n  padding: 5px 10px 10px;\n  box-sizing: border-box;\n  background-color: #fff;\n  transform: translateY(4px);\n}\n.panel-header[data-v-29b8b991] {\n  display: flex;\n  flex-flow: row nowrap;\n  width: 100%;\n}\n.arrow-left[data-v-29b8b991],\n.arrow-right[data-v-29b8b991] {\n  flex: 1;\n  font-size: 20px;\n  line-height: 2;\n  background-color: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.year-range[data-v-29b8b991] {\n  font-size: 20px;\n  line-height: 2;\n  flex: 3;\n  display: flex;\n  justify-content: center;\n}\n.year-month-box[data-v-29b8b991] {\n  flex: 3;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: space-around;\n}\n.type-year[data-v-29b8b991],\n.type-month[data-v-29b8b991],\n.date-list[data-v-29b8b991] {\n  background-color: #fff;\n}\n.year-box[data-v-29b8b991],\n.month-box[data-v-29b8b991] {\n  transition: all ease .1s;\n  font-family: Roboto, sans-serif;\n  flex: 1;\n  text-align: center;\n  font-size: 20px;\n  line-height: 2;\n  cursor: pointer;\n  background-color: #fff;\n}\n.year-list[data-v-29b8b991],\n.month-list[data-v-29b8b991] {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n}\n.year-list li[data-v-29b8b991],\n.month-list li[data-v-29b8b991] {\n  font-family: Roboto, sans-serif;\n  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1) 0ms;\n  cursor: pointer;\n  text-align: center;\n  font-size: 20px;\n  width: 33%;\n  padding: 10px 0;\n}\n.year-list li[data-v-29b8b991]:hover,\n.month-list li[data-v-29b8b991]:hover {\n  background-color: #6ac1c9;\n  color: #fff;\n}\n.year-list li.selected[data-v-29b8b991],\n.month-list li.selected[data-v-29b8b991] {\n  background-color: #0097a7;\n  color: #fff;\n}\n.year-list li.invalid[data-v-29b8b991],\n.month-list li.invalid[data-v-29b8b991] {\n  cursor: not-allowed;\n  color: #ccc;\n}\n.date-list[data-v-29b8b991] {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n}\n.date-list .valid[data-v-29b8b991]:hover {\n  background-color: #eee;\n}\n.date-list li[data-v-29b8b991] {\n  transition: all ease .1s;\n  cursor: pointer;\n  box-sizing: border-box;\n  border-bottom: 1px solid #fff;\n  position: relative;\n  margin: 2px;\n}\n.date-list li[data-v-29b8b991]:not(.firstItem) {\n  margin-left: 10px;\n}\n.date-list li .message[data-v-29b8b991] {\n  font-family: Roboto, sans-serif;\n  font-weight: 300;\n  font-size: 14px;\n  position: relative;\n  height: 30px;\n}\n.date-list li .message.selected .bg[data-v-29b8b991] {\n  background-color: #0097a7;\n}\n.date-list li .message.selected span[data-v-29b8b991] {\n  color: #fff;\n}\n.date-list li .message:not(.selected) .bg[data-v-29b8b991] {\n  transform: scale(0);\n  opacity: 0;\n}\n.date-list li .message:not(.selected):hover .bg[data-v-29b8b991] {\n  background-color: #0097a7;\n  transform: scale(1);\n  opacity: .6;\n}\n.date-list li .message:not(.selected):hover span[data-v-29b8b991] {\n  color: #fff;\n}\n.date-list li .message .bg[data-v-29b8b991] {\n  height: 30px;\n  width: 100%;\n  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;\n  border-radius: 50%;\n  position: absolute;\n  z-index: 10;\n  top: 0;\n  left: 0;\n}\n.date-list li .message span[data-v-29b8b991] {\n  position: absolute;\n  z-index: 20;\n  left: 50%;\n  top: 50%;\n  transform: translate3d(-50%, -50%, 0);\n}\n.date-list li.invalid[data-v-29b8b991] {\n  cursor: not-allowed;\n  color: #ccc;\n}\n.weeks[data-v-29b8b991] {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-between;\n}\n.weeks li[data-v-29b8b991] {\n  font-weight: 600;\n}\n.weeks[data-v-29b8b991],\n.date-list[data-v-29b8b991] {\n  width: 100%;\n  text-align: center;\n}\n.weeks .preMonth[data-v-29b8b991],\n.date-list .preMonth[data-v-29b8b991],\n.weeks .nextMonth[data-v-29b8b991],\n.date-list .nextMonth[data-v-29b8b991] {\n  color: #ccc;\n}\n.weeks li[data-v-29b8b991],\n.date-list li[data-v-29b8b991] {\n  font-family: Roboto;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n}\n.toggle-enter[data-v-29b8b991],\n.toggle-leave-active[data-v-29b8b991] {\n  opacity: 0;\n  transform: translateY(-10px);\n}\n.toggle-enter-active[data-v-29b8b991],\n.toggle-leave-active[data-v-29b8b991] {\n  transition: all ease .2s;\n}\n", ""]);
 
 	// exports
 
@@ -445,6 +445,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	//
+	//
 	//
 	//
 	//
@@ -1693,7 +1695,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    on: {
 	      "click": togglePanel
 	    }
-	  }), " ", _h('div', {
+	  }), " ", _h('transition', {
+	    attrs: {
+	      "name": "toggle"
+	    }
+	  }, [_h('div', {
 	    directives: [{
 	      name: "show",
 	      rawName: "v-show",
@@ -1701,10 +1707,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      expression: "panelState"
 	    }],
 	    staticClass: "date-panel",
-	    style: (coordinates),
-	    attrs: {
-	      "transition": "toggle"
-	    }
+	    style: (coordinates)
 	  }, [_h('div', {
 	    directives: [{
 	      name: "show",
@@ -1822,7 +1825,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          selectMonth(index)
 	        }
 	      }
-	    }, ["\n                    " + _s(_f("month")(item, language)) + "\n                "])
+	    }, ["\n                        " + _s(_f("month")(item, language)) + "\n                    "])
 	  })])]), " ", _h('div', {
 	    directives: [{
 	      name: "show",
@@ -1858,7 +1861,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        "textContent": _s(item.value)
 	      }
 	    })])])
-	  })])])])])
+	  })])])])])])
 	}},staticRenderFns: [function (){with(this) {
 	  return _h('div', {
 	    staticClass: "bg"
