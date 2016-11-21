@@ -1,7 +1,7 @@
 module.exports = {
     entry: './index.js',
     output: {
-        path: './dist',
+        path: './lib',
         library: 'datepicker',
         filename: 'vue-datepicker.js',
         libraryTarget: 'umd'
