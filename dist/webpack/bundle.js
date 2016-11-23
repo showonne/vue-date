@@ -7971,7 +7971,7 @@
 	            selected: '2016-08-03',
 	            start: '2016-01-01',
 	            end: '2015-11-01',
-	            range: ['2016-08-12', '2016-09-20']
+	            range: ['2016-01-01', '2016-01-11']
 	        };
 	    },
 
@@ -8447,15 +8447,22 @@
 	            _this2.maxDate = Number(maxArr[2]);
 
 	            if (_this2.range) {
-	                var rangeStart = _this2.value[0].split('-');
-	                var rangeEnd = _this2.value[1].split('-');
-	                _this2.tmpStartYear = Number(rangeStart[0]);
-	                _this2.tmpStartMonth = Number(rangeStart[1]) - 1;
-	                _this2.tmpStartDate = Number(rangeStart[2]);
+	                if (Object.prototype.toString.call(_this2.value).slice(8, -1) !== 'Array') {
+	                    throw new Error('Binding value must be an array in range mode.');
+	                }
+	                if (_this2.value.length) {
+	                    var rangeStart = _this2.value[0].split('-');
+	                    var rangeEnd = _this2.value[1].split('-');
+	                    _this2.tmpStartYear = Number(rangeStart[0]);
+	                    _this2.tmpStartMonth = Number(rangeStart[1]) - 1;
+	                    _this2.tmpStartDate = Number(rangeStart[2]);
 
-	                _this2.tmpEndYear = Number(rangeEnd[0]);
-	                _this2.tmpEndMonth = Number(rangeEnd[1]) - 1;
-	                _this2.tmpEndDate = Number(rangeEnd[2]);
+	                    _this2.tmpEndYear = Number(rangeEnd[0]);
+	                    _this2.tmpEndMonth = Number(rangeEnd[1]) - 1;
+	                    _this2.tmpEndDate = Number(rangeEnd[2]);
+	                } else {
+	                    _this2.$emit('input', ['', '']);
+	                }
 	            }
 	            if (!_this2.value) {
 	                _this2.value = _this2.tmpYear + '-' + ('0' + (_this2.month + 1)).slice(-2) + '-' + ('0' + _this2.date).slice(-2);
