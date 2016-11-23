@@ -331,15 +331,23 @@
                 this.maxDate = Number(maxArr[2])
 
                 if(this.range){
-                    let rangeStart = this.value[0].split('-')
-                    let rangeEnd = this.value[1].split('-')
-                    this.tmpStartYear = Number(rangeStart[0])
-                    this.tmpStartMonth = Number(rangeStart[1]) - 1
-                    this.tmpStartDate = Number(rangeStart[2])
+                    if(Object.prototype.toString.call(this.value).slice(8, -1) !== 'Array'){
+                        throw new Error('Binding value must be an array in range mode.')
+                    }
+                    if(this.value.length){
+                        let rangeStart = this.value[0].split('-')
+                        let rangeEnd = this.value[1].split('-')
+                        this.tmpStartYear = Number(rangeStart[0])
+                        this.tmpStartMonth = Number(rangeStart[1]) - 1
+                        this.tmpStartDate = Number(rangeStart[2])
 
-                    this.tmpEndYear = Number(rangeEnd[0])
-                    this.tmpEndMonth = Number(rangeEnd[1]) - 1
-                    this.tmpEndDate = Number(rangeEnd[2])
+                        this.tmpEndYear = Number(rangeEnd[0])
+                        this.tmpEndMonth = Number(rangeEnd[1]) - 1
+                        this.tmpEndDate = Number(rangeEnd[2])
+                    }else{
+                        this.$emit('input', ['', ''])
+                    }
+                    
                 }
                 if(!this.value){
                     this.value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
