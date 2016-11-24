@@ -350,7 +350,7 @@
                     
                 }
                 if(!this.value){
-                    this.value = `${this.tmpYear}-${('0' + (this.month + 1)).slice(-2)}-${('0' + this.date).slice(-2)}`
+                    this.$emit('input', '')
                 }
                 window.addEventListener('click', this.close)
             })
