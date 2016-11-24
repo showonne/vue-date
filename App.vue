@@ -29,7 +29,7 @@
             return {
                 selected: '2016-08-03',
                 start: '2016-01-01',
-                end: '2015-11-01',
+                end: '',
                 range: ['2016-01-01', '2016-01-11']
             }
         },
@@ -37,6 +37,9 @@
             change(key, value) {
                 console.log(key, value)
             }
+        },
+        mounted() {
+            this.range = ['2016-01-02', '2016-01-11']
         },
         components: { datepicker }
     }

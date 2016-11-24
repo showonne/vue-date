@@ -7970,7 +7970,7 @@
 	        return {
 	            selected: '2016-08-03',
 	            start: '2016-01-01',
-	            end: '2015-11-01',
+	            end: '',
 	            range: ['2016-01-01', '2016-01-11']
 	        };
 	    },
@@ -7980,6 +7980,10 @@
 	            console.log(key, value);
 	        }
 	    },
+	    mounted: function mounted() {
+	        this.range = ['2016-01-02', '2016-01-11'];
+	    },
+
 	    components: { datepicker: _Datepicker2.default }
 	}; //
 	//
@@ -8465,7 +8469,7 @@
 	                }
 	            }
 	            if (!_this2.value) {
-	                _this2.value = _this2.tmpYear + '-' + ('0' + (_this2.month + 1)).slice(-2) + '-' + ('0' + _this2.date).slice(-2);
+	                _this2.$emit('input', '');
 	            }
 	            window.addEventListener('click', _this2.close);
 	        });
