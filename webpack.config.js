@@ -1,9 +1,11 @@
+const path = require('path')
+
 module.exports = {
-    entry: './index.js',
+    entry: './src/Datepicker.vue',
     output: {
-        path: './lib',
+        path: path.resolve(__dirname, './'),
         library: 'datepicker',
-        filename: 'vue-datepicker.js',
+        filename: 'index.js',
         libraryTarget: 'umd'
     },
     module: {
