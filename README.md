@@ -21,7 +21,7 @@ Live Demo is [here(browser)](http://www.showonne.com/vue-date/dist/browser/) and
 </template>
 
 <script>
-    import datepicker from 'path/to/datepicker.vue'
+    import datepicker from 'vue-date'
     export default {
         data() {
             return {
