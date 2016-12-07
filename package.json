@@ -1,6 +1,6 @@
 {
   "name": "vue-date",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "datepicker component for Vue.js",
   "main": "index.js",
   "scripts": {
@@ -8,9 +8,7 @@
     "build": "webpack -p"
   },
   "files": [
-    "index.js",
-    "Datepicker.vue",
-    "lib"
+    "src"
   ],
   "keywords": [
     "datepicker",
