@@ -1,6 +1,6 @@
 {
   "name": "vue-date",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "datepicker component for Vue.js",
   "main": "index.js",
   "scripts": {
