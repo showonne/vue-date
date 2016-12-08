@@ -38,7 +38,7 @@ Live Demo is [here(browser)](http://www.showonne.com/vue-date/dist/browser/) and
 //index.html
 <html>
     <script src="path/to/vue.js"></script>
-    <script src="path/to/datepicker.js"></script>
+    <script src="path/to/index.js"></script>
     <body>
         <div id="app">
             <datepicker v-model="date"></datepicker>
