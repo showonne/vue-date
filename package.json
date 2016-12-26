@@ -29,6 +29,7 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "vue": "^2.0.3"
+    "vue": "^2.0.3",
+    "vue-date": "^1.0.5"
   }
 }

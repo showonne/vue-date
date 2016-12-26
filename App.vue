@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    import datepicker from './Datepicker.vue'
+    import datepicker from 'vue-date'
     export default {
         name: 'Demo',
         data () {
