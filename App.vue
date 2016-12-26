@@ -18,6 +18,12 @@
         <datepicker language="ch" v-model="range" class="picker picker-range" :min="start" max="2020-01-08" :range="true">
         </datepicker>
         <h5>The range is from <b>{{range[0]}}</b> to <b>{{range[1]}}</b> && the sync value is an Array: <b>[{{range[0]}}, {{range[1]}}]</b></h5>
+        <hr>
+        <h2>Clear Date:</h2>
+        <h5>Just change datepicker's value to empty string.</h5>
+        <h5>Date: {{init}}</h5>
+        <datepicker v-model="init" class="picker"></datepicker>
+        <button @click="clear" class="btn">Clear</button>
     </div>
 </template>
 
@@ -30,12 +36,16 @@
                 selected: '2016-08-03',
                 start: '2016-01-01',
                 end: '',
-                range: ['2016-01-01', '2016-01-11']
+                range: ['2016-01-01', '2016-01-11'],
+                init: '2016-12-26'
             }
         },
         methods: {
             change(key, value) {
                 console.log(key, value)
+            },
+            clear() {
+                this.init = ' '
             }
         },
         mounted() {
@@ -46,6 +56,9 @@
 </script>
 
 <style>
+    .btn{
+        margin-top: 20px;
+    }
     #app{
         width: 750px;
         margin: 0 auto;
