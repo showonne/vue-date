@@ -1,6 +1,6 @@
 <template>
     <div class="date-picker">
-        <div class="input" type="text" @click="togglePanel" v-text="range ? value[0] + ' -- ' + value[1] : value"></div>
+        <div class="input" @click="togglePanel" v-text="range ? value[0] + ' -- ' + value[1] : value"></div>
         <transition name="toggle">
             <div class="date-panel" v-show="panelState" :style="coordinates">
                 <div class="panel-header" v-show="panelType !== 'year'">
@@ -369,6 +369,7 @@
     }
     .date-picker{
         position: relative;
+        height: 32px;
     }
     .input{
         width: 100%;
