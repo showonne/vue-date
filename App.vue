@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    import datepicker from 'vue-date'
+    import datepicker from './Datepicker.vue'
     export default {
         name: 'Demo',
         data () {
@@ -69,6 +69,9 @@
     }
     .picker{
         width: 200px;
+    }
+    .picker-range{
+        width: 220px;
     }
     .range{
         display: flex;
