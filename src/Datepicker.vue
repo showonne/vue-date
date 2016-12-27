@@ -1,6 +1,11 @@
 <template>
     <div class="date-picker">
-        <div class="input" @click="togglePanel" v-text="range ? value[0] + ' -- ' + value[1] : value"></div>
+        <div class="input-wrapper" @mouseenter="showCancel = true" @mouseleave="showCancel = false">
+            <div class="input" @click="togglePanel" v-text="range ? value[0] + ' -- ' + value[1] : value"></div>
+            <transition name="fade">
+                <img class="cancel-btn" src="./cancel.png" v-show="showCancel" @click="clear">
+            </transition>
+        </div>
         <transition name="toggle">
             <div class="date-panel" v-show="panelState" :style="coordinates">
                 <div class="panel-header" v-show="panelType !== 'year'">
@@ -63,6 +68,7 @@
         data () {
             let now = new Date()
             return {
+                showCancel: false,
                 panelState: false,
                 panelType: 'date',
                 coordinates: {},
@@ -252,6 +258,9 @@
                     this.panelState = false
                     this.rangeStart = false
                 }
+            },
+            clear() {
+                this.$emit('input', this.range ? ['', ''] : '')
             }
         },
         watch: {
@@ -371,16 +380,29 @@
         position: relative;
         height: 32px;
     }
+    .input-wrapper{
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        vertical-align: middle;
+        display: flex;
+        justify-content: space-between;
+        flex-flow: row nowrap;
+        align-items: center;
+        padding: 6px 10px 6px 4px;
+        height: 32px;
+        box-sizing: border-box;
+    }
     .input{
-        width: 100%;
         height: 100%;
+        width: 100%;
         font-size: inherit;
-        line-height: 2;
         padding-left: 4px;
         box-sizing: border-box;
         outline: none;
-        border: 1px solid #ccc;
-        border-radius: 2px;
+    }
+    .cancel-btn{
+        height: 14px;
+        width: 14px;
     }
     .date-panel{
         position: absolute;
@@ -551,7 +573,6 @@
             height: 30px;
             text-align: center;
             line-height: 30px;
-
         }
     }
     .toggle-enter, .toggle-leave-active{
@@ -560,5 +581,12 @@
     }
     .toggle-enter-active, .toggle-leave-active{
         transition: all ease .2s;
+    }
+    .fade-enter, .fade-leave-active{
+        opacity: 0;
+        transform: scale3d(0, 0, 0);
+    }
+    .fade-enter-active, .fade-leave-active{
+        transition: all ease .1s;
     }
 </style>
