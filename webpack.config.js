@@ -14,7 +14,7 @@ module.exports = {
         loaders: [
             {test: /\.vue$/, loaders: ['vue']},
             {test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
-            {test: /\.png$/, loaders: ['file']}
+            {test: /\.png$/, loader: 'url-loader?limit=8192'}
         ]
     },
     resolve: {
