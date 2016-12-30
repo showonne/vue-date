@@ -69,10 +69,12 @@ The language type. Only support `en`(English) and `ch`(Chinese) now.
 ###### Default: `1970-01-01`
 The minimum date.
 
-    //pass string
-    <datepicker v-model="start" min="2015-01-01"</datepicker>
-    //or pass variable
-    <datepicker v-model="start" :min="variable"></datepicker>
+```html
+//pass string
+<datepicker v-model="start" min="2015-01-01"</datepicker>
+//or pass variable
+<datepicker v-model="start" :min="variable"></datepicker>
+```
 
 #### max
 ###### Type: `String`
