@@ -24,6 +24,11 @@
         <h5>Date: {{init}}</h5>
         <datepicker v-model="init" class="picker"></datepicker>
         <button @click="clear" class="btn">Clear</button>
+        <hr/>
+        <h2>Mutate Range Mode</h2>
+        <datepicker :class="{'picker': !event_date.range, 'picker-range': event_date.range}" :range="event_date.range" v-model="event_date.date" @input="updateEventDate">
+        </datepicker>
+        <input type="checkbox" id="isrange" v-model="event_date.range"><label for="isrange">Switch range mode</label>
     </div>
 </template>
 
@@ -37,7 +42,11 @@
                 start: '2016-01-01',
                 end: '',
                 range: ['2016-01-01', '2016-01-11'],
-                init: '2016-12-26'
+                init: '2016-12-26',
+                event_date: {
+                    date: '',
+                    range: false
+                }
             }
         },
         methods: {
@@ -46,6 +55,9 @@
             },
             clear() {
                 this.init = ' '
+            },
+            updateEventDate(val) {
+                console.log(val)
             }
         },
         mounted() {

@@ -322,6 +322,17 @@
                 }
             }
         },
+        watch: {
+            range (newVal, oldVal) {
+                if(newVal === oldVal) return
+                if(newVal && Object.prototype.toString.call(this.value).slice(8, -1) === 'String'){
+                    this.$emit('input', ['', ''])
+                }
+                if(!newVal && Object.prototype.toString.call(this.value).slice(8, -1) === 'Array'){
+                    this.$emit('input', '')
+                }
+            }
+        },
         mounted () {
             this.$nextTick(() => {
                 if(this.$el.parentNode.offsetWidth + this.$el.parentNode.offsetLeft - this.$el.offsetLeft <= 300){
