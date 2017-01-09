@@ -9089,15 +9089,9 @@
 	    value: true
 	});
 
-	var _defineProperty2 = __webpack_require__(68);
-
-	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
 	var _from = __webpack_require__(12);
 
 	var _from2 = _interopRequireDefault(_from);
-
-	var _data$props$methods$w;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9167,7 +9161,7 @@
 	//
 	//
 
-	exports.default = (_data$props$methods$w = {
+	exports.default = {
 	    data: function data() {
 	        var now = new Date();
 	        return {
@@ -9382,6 +9376,15 @@
 	            this.maxYear = Number(maxArr[0]);
 	            this.maxMonth = Number(maxArr[1]);
 	            this.maxDate = Number(maxArr[2]);
+	        },
+	        range: function range(newVal, oldVal) {
+	            if (newVal === oldVal) return;
+	            if (newVal && Object.prototype.toString.call(this.value).slice(8, -1) === 'String') {
+	                this.$emit('input', ['', '']);
+	            }
+	            if (!newVal && Object.prototype.toString.call(this.value).slice(8, -1) === 'Array') {
+	                this.$emit('input', '');
+	            }
 	        }
 	    },
 	    computed: {
@@ -9428,62 +9431,54 @@
 	                    return item;
 	            }
 	        }
-	    }
-	}, (0, _defineProperty3.default)(_data$props$methods$w, 'watch', {
-	    range: function range(newVal, oldVal) {
-	        if (newVal === oldVal) return;
-	        if (newVal && Object.prototype.toString.call(this.value).slice(8, -1) === 'String') {
-	            this.$emit('input', ['', '']);
-	        }
-	        if (!newVal && Object.prototype.toString.call(this.value).slice(8, -1) === 'Array') {
-	            this.$emit('input', '');
-	        }
-	    }
-	}), (0, _defineProperty3.default)(_data$props$methods$w, 'mounted', function mounted() {
-	    var _this2 = this;
+	    },
+	    mounted: function mounted() {
+	        var _this2 = this;
 
-	    this.$nextTick(function () {
-	        if (_this2.$el.parentNode.offsetWidth + _this2.$el.parentNode.offsetLeft - _this2.$el.offsetLeft <= 300) {
-	            _this2.coordinates = { right: '0', top: window.getComputedStyle(_this2.$el.children[0]).offsetHeight + 4 + 'px' };
-	        } else {
-	            _this2.coordinates = { left: '0', top: window.getComputedStyle(_this2.$el.children[0]).offsetHeight + 4 + 'px' };
-	        }
-	        var minArr = _this2.min.split('-');
-	        _this2.minYear = Number(minArr[0]);
-	        _this2.minMonth = Number(minArr[1]);
-	        _this2.minDate = Number(minArr[2]);
-
-	        var maxArr = _this2.max.split('-');
-	        _this2.maxYear = Number(maxArr[0]);
-	        _this2.maxMonth = Number(maxArr[1]);
-	        _this2.maxDate = Number(maxArr[2]);
-
-	        if (_this2.range) {
-	            if (Object.prototype.toString.call(_this2.value).slice(8, -1) !== 'Array') {
-	                throw new Error('Binding value must be an array in range mode.');
-	            }
-	            if (_this2.value.length) {
-	                var rangeStart = _this2.value[0].split('-');
-	                var rangeEnd = _this2.value[1].split('-');
-	                _this2.tmpStartYear = Number(rangeStart[0]);
-	                _this2.tmpStartMonth = Number(rangeStart[1]) - 1;
-	                _this2.tmpStartDate = Number(rangeStart[2]);
-
-	                _this2.tmpEndYear = Number(rangeEnd[0]);
-	                _this2.tmpEndMonth = Number(rangeEnd[1]) - 1;
-	                _this2.tmpEndDate = Number(rangeEnd[2]);
+	        this.$nextTick(function () {
+	            if (_this2.$el.parentNode.offsetWidth + _this2.$el.parentNode.offsetLeft - _this2.$el.offsetLeft <= 300) {
+	                _this2.coordinates = { right: '0', top: window.getComputedStyle(_this2.$el.children[0]).offsetHeight + 4 + 'px' };
 	            } else {
-	                _this2.$emit('input', ['', '']);
+	                _this2.coordinates = { left: '0', top: window.getComputedStyle(_this2.$el.children[0]).offsetHeight + 4 + 'px' };
 	            }
-	        }
-	        if (!_this2.value) {
-	            _this2.$emit('input', '');
-	        }
-	        window.addEventListener('click', _this2.close);
-	    });
-	}), (0, _defineProperty3.default)(_data$props$methods$w, 'beforeDestroy', function beforeDestroy() {
-	    window.removeEventListener('click', this.close);
-	}), _data$props$methods$w);
+	            var minArr = _this2.min.split('-');
+	            _this2.minYear = Number(minArr[0]);
+	            _this2.minMonth = Number(minArr[1]);
+	            _this2.minDate = Number(minArr[2]);
+
+	            var maxArr = _this2.max.split('-');
+	            _this2.maxYear = Number(maxArr[0]);
+	            _this2.maxMonth = Number(maxArr[1]);
+	            _this2.maxDate = Number(maxArr[2]);
+
+	            if (_this2.range) {
+	                if (Object.prototype.toString.call(_this2.value).slice(8, -1) !== 'Array') {
+	                    throw new Error('Binding value must be an array in range mode.');
+	                }
+	                if (_this2.value.length) {
+	                    var rangeStart = _this2.value[0].split('-');
+	                    var rangeEnd = _this2.value[1].split('-');
+	                    _this2.tmpStartYear = Number(rangeStart[0]);
+	                    _this2.tmpStartMonth = Number(rangeStart[1]) - 1;
+	                    _this2.tmpStartDate = Number(rangeStart[2]);
+
+	                    _this2.tmpEndYear = Number(rangeEnd[0]);
+	                    _this2.tmpEndMonth = Number(rangeEnd[1]) - 1;
+	                    _this2.tmpEndDate = Number(rangeEnd[2]);
+	                } else {
+	                    _this2.$emit('input', ['', '']);
+	                }
+	            }
+	            if (!_this2.value) {
+	                _this2.$emit('input', '');
+	            }
+	            window.addEventListener('click', _this2.close);
+	        });
+	    },
+	    beforeDestroy: function beforeDestroy() {
+	        window.removeEventListener('click', this.close);
+	    }
+	};
 
 /***/ },
 /* 12 */
@@ -10759,59 +10754,6 @@
 	     require("vue-hot-reload-api").rerender("data-v-2cc4a00e", module.exports)
 	  }
 	}
-
-/***/ },
-/* 68 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	exports.__esModule = true;
-
-	var _defineProperty = __webpack_require__(69);
-
-	var _defineProperty2 = _interopRequireDefault(_defineProperty);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function (obj, key, value) {
-	  if (key in obj) {
-	    (0, _defineProperty2.default)(obj, key, {
-	      value: value,
-	      enumerable: true,
-	      configurable: true,
-	      writable: true
-	    });
-	  } else {
-	    obj[key] = value;
-	  }
-
-	  return obj;
-	};
-
-/***/ },
-/* 69 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(70), __esModule: true };
-
-/***/ },
-/* 70 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(71);
-	var $Object = __webpack_require__(22).Object;
-	module.exports = function defineProperty(it, key, desc){
-	  return $Object.defineProperty(it, key, desc);
-	};
-
-/***/ },
-/* 71 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $export = __webpack_require__(20);
-	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-	$export($export.S + $export.F * !__webpack_require__(30), 'Object', {defineProperty: __webpack_require__(26).f});
 
 /***/ }
 /******/ ]);

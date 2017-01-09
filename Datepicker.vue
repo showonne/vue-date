@@ -275,6 +275,15 @@
                 this.maxYear = Number(maxArr[0])
                 this.maxMonth = Number(maxArr[1])
                 this.maxDate = Number(maxArr[2])
+            },
+            range (newVal, oldVal) {
+                if(newVal === oldVal) return
+                if(newVal && Object.prototype.toString.call(this.value).slice(8, -1) === 'String'){
+                    this.$emit('input', ['', ''])
+                }
+                if(!newVal && Object.prototype.toString.call(this.value).slice(8, -1) === 'Array'){
+                    this.$emit('input', '')
+                }
             }
         },
         computed: {
@@ -319,17 +328,6 @@
                          7: '七', 8: '八', 9: '九', 10: '十', 11: '十一', 12: '十二'}[item]
                     default:
                         return item
-                }
-            }
-        },
-        watch: {
-            range (newVal, oldVal) {
-                if(newVal === oldVal) return
-                if(newVal && Object.prototype.toString.call(this.value).slice(8, -1) === 'String'){
-                    this.$emit('input', ['', ''])
-                }
-                if(!newVal && Object.prototype.toString.call(this.value).slice(8, -1) === 'Array'){
-                    this.$emit('input', '')
                 }
             }
         },
