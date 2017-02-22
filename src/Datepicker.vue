@@ -295,8 +295,8 @@
                         value: index + 1
                     }
                 })
-                let startDay = new Date(this.year, this.tmpMonth, 1).getDay()
-                let previousMongthLength = new Date(this.year, this.tmpMonth, 0).getDate()
+                let startDay = new Date(this.tmpYear, this.tmpMonth, 1).getDay()
+                let previousMongthLength = new Date(this.tmpYear, this.tmpMonth, 0).getDate()
 
                 for(let i = 0, len = startDay; i < len; i++){
                     dateList = [{previousMonth: true, value: previousMongthLength - i}].concat(dateList)
