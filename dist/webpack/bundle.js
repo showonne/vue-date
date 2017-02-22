@@ -9396,8 +9396,8 @@
 	                    value: index + 1
 	                };
 	            });
-	            var startDay = new Date(this.year, this.tmpMonth, 1).getDay();
-	            var previousMongthLength = new Date(this.year, this.tmpMonth, 0).getDate();
+	            var startDay = new Date(this.tmpYear, this.tmpMonth, 1).getDay();
+	            var previousMongthLength = new Date(this.tmpYear, this.tmpMonth, 0).getDate();
 
 	            for (var i = 0, len = startDay; i < len; i++) {
 	                dateList = [{ previousMonth: true, value: previousMongthLength - i }].concat(dateList);
