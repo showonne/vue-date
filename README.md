@@ -81,7 +81,7 @@ The minimum date.
 ###### Default: `3016-01-01`
 The maximum date. Usage is same of `min`.
 
-#### range
+#### rang
 ###### Type: `Boolean`
 ###### Default: `false`
 Use range mode or not. If  pass `true`, the binding value should be an Array  containg the range start and range end. eg. `['1970-01-01', '3016-01-01']`
