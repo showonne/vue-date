@@ -260,6 +260,15 @@
                 }
             },
             clear() {
+                const now = new Date();
+                this.tmpYear = now.getFullYear();
+                this.tmpMonth = now.getMonth();
+                this.tmpStartYear = now.getFullYear();
+                this.tmpStartMonth = now.getMonth();
+                this.tmpStartDate = now.getDate();
+                this.tmpEndYear = now.getFullYear();
+                this.tmpEndMonth = now.getMonth();
+                this.tmpEndDate = now.getDate();
                 this.$emit('input', this.range ? ['', ''] : '')
             }
         },
