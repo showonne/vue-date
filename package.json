@@ -6,8 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "exit 0",
-    "ci-publish": "ci-publish",
-    "build": "webpack"
+    "dev": "poi",
+    "build": "poi build --entry ./src/Datepicker.vue"
   },
   "files": [
     "src"
@@ -20,21 +20,8 @@
   "author": "showonne",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.11.4",
-    "babel-loader": "^6.2.4",
-    "babel-plugin-transform-runtime": "^6.12.0",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "ci-publish": "^1.3.0",
-    "css-loader": "^0.23.1",
-    "file-loader": "^0.9.0",
-    "less": "^2.7.1",
-    "less-loader": "^2.2.3",
-    "url-loader": "^0.5.7",
-    "vue-hot-reload-api": "^2.0.5",
-    "vue-html-loader": "^1.2.3",
-    "vue-loader": "^8.5.3",
-    "vue-style-loader": "^1.0.0",
-    "webpack": "^1.13.1"
+    "less": "^3.0.2",
+    "less-loader": "^4.1.0",
+    "poi": "^10.1.5"
   }
 }

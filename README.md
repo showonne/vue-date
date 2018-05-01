@@ -61,7 +61,7 @@ Live Demo is [here(browser)](http://www.showonne.com/vue-date/dist/browser/) and
 #### language
 ###### Type: `String`
 ###### Default: `en`
-###### Optional: `en(English)`, `ch(Chinese)`, `uk(Ukrainsk)`, `es(Spanish)`
+###### Optional: `en(English)`, `zh-cn(Chinese)`, `uk(Ukrainsk)`, `es(Spanish)`
 The language type. Support `en`(English), `ch`(Chinese), `uk`(Ukrainsk) and `es`(Spanish) now.
 
 #### min

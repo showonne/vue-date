@@ -27,6 +27,7 @@
                     <ul class="year-list">
                         <li v-for="item in yearList"
                             v-text="item"
+                            :key="item"
                             :class="{selected: isSelected('year', item), invalid: validateYear(item)}" 
                             @click="selectYear(item)"
                         >
@@ -36,6 +37,7 @@
                 <div class="type-month" v-show="panelType === 'month'">
                     <ul class="month-list">
                         <li v-for="(item, index) in monthList"
+                            :key="item"
                             :class="{selected: isSelected('month', index), invalid: validateMonth(index)}" 
                             @click="selectMonth(index)"
                         >
@@ -45,10 +47,11 @@
                 </div>
                 <div class="type-date" v-show="panelType === 'date'">
                     <ul class="weeks">
-                        <li v-for="item in weekList">{{item | week(language)}}</li>
+                        <li v-for="item in weekList" :key="item">{{item | week(language)}}</li>
                     </ul>
                     <ul class="date-list">
                         <li v-for="(item, index) in dateList"
+                            :key="item"
                             :class="{preMonth: item.previousMonth, nextMonth: item.nextMonth,
                                 invalid: validateDate(item), firstItem: (index % 7) === 0}"
                             @click="selectDate(item)">
@@ -67,22 +70,31 @@
     export default {
         data () {
             let now = new Date()
+            let startDate, endDate
+
+            if(this.range){
+                startDate = this.value[0] ? new Date(this.value[0]) : now
+                endDate = this.value[1] ? new Date(this.value[1]) : now
+            }else{
+                startDate = endDate = this.value ? new Date(this.value) : now
+            }
+
             return {
                 showCancel: false,
                 panelState: false,
                 panelType: 'date',
                 coordinates: {},
-                year: now.getFullYear(),
-                month: now.getMonth(),
-                date: now.getDate(),
-                tmpYear: now.getFullYear(),
-                tmpMonth: now.getMonth(),
-                tmpStartYear: now.getFullYear(),
-                tmpStartMonth: now.getMonth(),
-                tmpStartDate: now.getDate(),
-                tmpEndYear: now.getFullYear(),
-                tmpEndMonth: now.getMonth(),
-                tmpEndDate: now.getDate(),
+                year: endDate.getFullYear(),
+                month: endDate.getMonth(),
+                date: endDate.getDate(),
+                tmpYear: endDate.getFullYear(),
+                tmpMonth: endDate.getMonth(),
+                tmpStartYear: startDate.getFullYear(),
+                tmpStartMonth: startDate.getMonth(),
+                tmpStartDate: startDate.getDate(),
+                tmpEndYear: endDate.getFullYear(),
+                tmpEndMonth: endDate.getMonth(),
+                tmpEndDate: endDate.getDate(),
                 minYear: Number,
                 minMonth: Number,
                 minDate: Number,
@@ -312,7 +324,7 @@
                 switch (lang) {
                     case 'en':
                         return {0: 'Su', 1: 'Mo', 2: 'Tu', 3: 'We', 4: 'Th', 5: 'Fr', 6: 'Sa'}[item]
-                    case 'ch':
+                    case 'zh-cn':
                         return {0: '日', 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六'}[item]
                     case 'uk':
                         return {0: 'Пн', 1: 'Вт', 2: 'Ср', 3: 'Чт', 4: 'Пт', 5: 'Сб', 6: 'Нд'}[item]
@@ -327,13 +339,13 @@
                     case 'en':
                         return {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun',
                          7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}[item]
-                    case 'ch':
+                    case 'zh-cn':
                         return {1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六',
                          7: '七', 8: '八', 9: '九', 10: '十', 11: '十一', 12: '十二'}[item]
                     case 'uk':
                         return {1: 'Січень', 2: 'Лютий', 3: 'Березень', 4: 'Квітень', 5: 'Травень', 6: 'Червень',
                          7: 'Липень', 8: 'Серпень', 9: 'Вересень', 10: 'Жовтень', 11: 'Листопад', 12: 'Грудень'}[item]
-                    case 'en':
+                    case 'es':
                         return {1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr', 5: 'May', 6: 'Jun',
                          7: 'Jul', 8: 'Ago', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic'}[item]
                     default:
