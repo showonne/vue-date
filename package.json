@@ -7,7 +7,7 @@
   "scripts": {
     "test": "exit 0",
     "dev": "poi",
-    "build": "poi build --entry ./src/Datepicker.vue"
+    "build": "webpack"
   },
   "files": [
     "src"
@@ -20,8 +20,12 @@
   "author": "showonne",
   "license": "MIT",
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.46",
+    "@babel/preset-env": "^7.0.0-beta.46",
+    "@babel/preset-stage-0": "^7.0.0-beta.46",
     "less": "^3.0.2",
     "less-loader": "^4.1.0",
-    "poi": "^10.1.5"
+    "poi": "^10.1.5",
+    "webpack-cli": "^2.1.2"
   }
 }
