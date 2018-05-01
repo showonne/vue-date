@@ -1,9 +1,9 @@
 # vue-datepicker
 
-> datepicker component for Vue.js, already support Vue.js 2.x, the Vue.js 1.x version is on branch `vue-1.x`.
+> datepicker component for Vue.js, already support Vue.js 2.x, the Vue.js 1.x version is on branch `vue-1.x`(not maintain).
 
 
-Live Demo is [here(browser)](http://www.showonne.com/vue-date/dist/browser/) and [here(webpack)](http://www.showonne.com/vue-date/dist/webpack/)
+Live Demo is [here](http://www.showonne.com/vue-date)
 
 ## Installation
 
