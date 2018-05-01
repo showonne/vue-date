@@ -6,7 +6,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "exit 0",
-    "dev": "poi",
+    "dev": "poi index.js",
+    "docs": "poi build index.js --out-dir docs",
     "build": "webpack",
     "prepublishOnly": "npm run build"
   },

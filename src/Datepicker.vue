@@ -51,7 +51,7 @@
                     </ul>
                     <ul class="date-list">
                         <li v-for="(item, index) in dateList"
-                            :key="item"
+                            :key="index"
                             :class="{preMonth: item.previousMonth, nextMonth: item.nextMonth,
                                 invalid: validateDate(item), firstItem: (index % 7) === 0}"
                             @click="selectDate(item)">
