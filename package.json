@@ -7,7 +7,7 @@
   "scripts": {
     "test": "exit 0",
     "dev": "poi index.js",
-    "docs": "poi build index.js --out-dir docs",
+    "docs": "poi build index.js --out-dir docs --public-path /vue-date",
     "build": "webpack",
     "prepublishOnly": "npm run build"
   },
