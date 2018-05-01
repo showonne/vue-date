@@ -3,11 +3,12 @@
   "version": "1.1.7",
   "description": "datepicker component for Vue.js",
   "repository": "showonne/vue-date",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "exit 0",
     "dev": "poi",
-    "build": "webpack"
+    "build": "webpack",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "src"
