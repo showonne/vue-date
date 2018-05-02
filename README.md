@@ -62,7 +62,7 @@ Live Demo is [here](http://www.showonne.com/vue-date)
 ###### Type: `String`
 ###### Default: `en`
 ###### Optional: `en(English)`, `zh-cn(Chinese)`, `uk(Ukrainsk)`, `es(Spanish)`
-The language type. Support `en`(English), `ch`(Chinese), `uk`(Ukrainsk) and `es`(Spanish) now.
+The language type. Support `en`(English), `zh-cn`(Chinese), `uk`(Ukrainsk) and `es`(Spanish) now.
 
 #### min
 ###### Type: `String`
