@@ -28,7 +28,7 @@
                         <li v-for="item in yearList"
                             v-text="item"
                             :key="item"
-                            :class="{selected: isSelected('year', item), invalid: validateYear(item)}" 
+                            :class="{selected: isSelected('year', item), invalid: validateYear(item)}"
                             @click="selectYear(item)"
                         >
                         </li>
@@ -38,7 +38,7 @@
                     <ul class="month-list">
                         <li v-for="(item, index) in monthList"
                             :key="item"
-                            :class="{selected: isSelected('month', index), invalid: validateMonth(index)}" 
+                            :class="{selected: isSelected('month', index), invalid: validateMonth(index)}"
                             @click="selectMonth(index)"
                         >
                             {{item | month(language)}}
@@ -70,13 +70,48 @@
     export default {
         data () {
             let now = new Date()
-            let startDate, endDate
+            let startDate, endDate,
+            year,
+            month,
+            date,
+            tmpYear,
+            tmpMonth,
+            tmpStartYear,
+            tmpStartMonth,
+            tmpStartDate,
+            tmpEndYear,
+            tmpEndMonth,
+            tmpEndDate
 
             if(this.range){
                 startDate = this.value[0] ? new Date(this.value[0]) : now
                 endDate = this.value[1] ? new Date(this.value[1]) : now
+
+                year = this.value[1] ? endDate.getUTCFullYear(): endDate.getFullYear()
+                month = this.value[1] ? endDate.getUTCMonth(): endDate.getMonth()
+                date = this.value[1] ? endDate.getUTCDate(): endDate.getDate()
+                tmpYear = this.value[1] ? endDate.getUTCFullYear(): endDate.getFullYear()
+                tmpMonth = this.value[1] ? endDate.getUTCMonth(): endDate.getMonth()
+                tmpStartYear = this.value[0] ? startDate.getUTCFullYear(): startDate.getFullYear()
+                tmpStartMonth = this.value[0] ? startDate.getUTCMonth(): startDate.getMonth()
+                tmpStartDate = this.value[0] ? startDate.getUTCDate(): startDate.getDate()
+                tmpEndYear = this.value[1] ? endDate.getUTCFullYear(): endDate.getFullYear()
+                tmpEndMonth = this.value[1] ? endDate.getUTCMonth(): endDate.getMonth()
+                tmpEndDate = this.value[1] ? endDate.getUTCDate(): endDate.getDate()
             }else{
                 startDate = endDate = this.value ? new Date(this.value) : now
+
+                year = this.value ? endDate.getUTCFullYear(): endDate.getFullYear()
+                month = this.value ? endDate.getUTCMonth(): endDate.getMonth()
+                date = this.value ? endDate.getUTCDate(): endDate.getDate()
+                tmpYear = this.value ? endDate.getUTCFullYear(): endDate.getFullYear()
+                tmpMonth = this.value ? endDate.getUTCMonth(): endDate.getMonth()
+                tmpStartYear = this.value ? startDate.getUTCFullYear(): startDate.getFullYear()
+                tmpStartMonth = this.value ? startDate.getUTCMonth(): startDate.getMonth()
+                tmpStartDate = this.value ? startDate.getUTCDate(): startDate.getDate()
+                tmpEndYear = this.value ? endDate.getUTCFullYear(): endDate.getFullYear()
+                tmpEndMonth = this.value ? endDate.getUTCMonth(): endDate.getMonth()
+                tmpEndDate = this.value ? endDate.getUTCDate(): endDate.getDate()
             }
 
             return {
@@ -84,17 +119,17 @@
                 panelState: false,
                 panelType: 'date',
                 coordinates: {},
-                year: endDate.getFullYear(),
-                month: endDate.getMonth(),
-                date: endDate.getDate(),
-                tmpYear: endDate.getFullYear(),
-                tmpMonth: endDate.getMonth(),
-                tmpStartYear: startDate.getFullYear(),
-                tmpStartMonth: startDate.getMonth(),
-                tmpStartDate: startDate.getDate(),
-                tmpEndYear: endDate.getFullYear(),
-                tmpEndMonth: endDate.getMonth(),
-                tmpEndDate: endDate.getDate(),
+                year: year,
+                month: month,
+                date: date,
+                tmpYear: tmpYear,
+                tmpMonth: tmpMonth,
+                tmpStartYear: tmpStartYear,
+                tmpStartMonth: tmpStartMonth,
+                tmpStartDate: tmpStartDate,
+                tmpEndYear: tmpEndYear,
+                tmpEndMonth: tmpEndMonth,
+                tmpEndDate: tmpEndDate,
                 minYear: Number,
                 minMonth: Number,
                 minDate: Number,
@@ -129,18 +164,18 @@
                 switch (type){
                     case 'year':
                         if(!this.range) return item === this.tmpYear
-                        return (new Date(item, 0).getTime() >= new Date(this.tmpStartYear, 0).getTime() 
+                        return (new Date(item, 0).getTime() >= new Date(this.tmpStartYear, 0).getTime()
                             && new Date(item, 0).getTime() <= new Date(this.tmpEndYear, 0).getTime())
                     case 'month':
                         if(!this.range) return item === this.tmpMonth && this.year === this.tmpYear
-                        return (new Date(this.tmpYear, item).getTime() >= new Date(this.tmpStartYear, this.tmpStartMonth).getTime() 
+                        return (new Date(this.tmpYear, item).getTime() >= new Date(this.tmpStartYear, this.tmpStartMonth).getTime()
                             && new Date(this.tmpYear, item).getTime() <= new Date(this.tmpEndYear, this.tmpEndMonth).getTime())
                     case 'date':
                         if(!this.range) return this.date === item.value && this.month === this.tmpMonth && item.currentMonth
                         let month = this.tmpMonth
                         item.previousMonth && month--
                         item.nextMonth && month++
-                        return (new Date(this.tmpYear, month, item.value).getTime() >= new Date(this.tmpStartYear, this.tmpStartMonth, this.tmpStartDate).getTime() 
+                        return (new Date(this.tmpYear, month, item.value).getTime() >= new Date(this.tmpStartYear, this.tmpStartMonth, this.tmpStartDate).getTime()
                             && new Date(this.tmpYear, month, item.value).getTime() <= new Date(this.tmpEndYear, this.tmpEndMonth, this.tmpEndDate).getTime())
                 }
             },
@@ -210,7 +245,7 @@
                         this.rangeStart = true
 
                     }else if(this.range && this.rangeStart){
-                        
+
                         this.tmpEndYear = this.tmpYear
                         this.tmpEndMonth = this.tmpMonth
                         this.tmpEndDate = date.value
@@ -219,7 +254,7 @@
                             d2 = new Date(this.tmpEndYear, this.tmpEndMonth, this.tmpEndDate).getTime()
                         if(d1 > d2){
                             let tmpY, tmpM, tmpD
-                            tmpY = this.tmpEndYear 
+                            tmpY = this.tmpEndYear
                             tmpM = this.tmpEndMonth
                             tmpD = this.tmpEndDate
 
@@ -387,7 +422,7 @@
                     }else{
                         this.$emit('input', ['', ''])
                     }
-                    
+
                 }
                 if(!this.value){
                     this.$emit('input', '')
@@ -582,7 +617,7 @@
                 color: #ccc;
             }
         }
-        
+
     }
     .weeks{
         display: flex;
