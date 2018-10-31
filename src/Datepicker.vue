@@ -87,31 +87,38 @@
                 startDate = this.value[0] ? new Date(this.value[0]) : now
                 endDate = this.value[1] ? new Date(this.value[1]) : now
 
-                year = this.value[1] ? endDate.getUTCFullYear(): endDate.getFullYear()
-                month = this.value[1] ? endDate.getUTCMonth(): endDate.getMonth()
-                date = this.value[1] ? endDate.getUTCDate(): endDate.getDate()
-                tmpYear = this.value[1] ? endDate.getUTCFullYear(): endDate.getFullYear()
-                tmpMonth = this.value[1] ? endDate.getUTCMonth(): endDate.getMonth()
-                tmpStartYear = this.value[0] ? startDate.getUTCFullYear(): startDate.getFullYear()
-                tmpStartMonth = this.value[0] ? startDate.getUTCMonth(): startDate.getMonth()
-                tmpStartDate = this.value[0] ? startDate.getUTCDate(): startDate.getDate()
-                tmpEndYear = this.value[1] ? endDate.getUTCFullYear(): endDate.getFullYear()
-                tmpEndMonth = this.value[1] ? endDate.getUTCMonth(): endDate.getMonth()
-                tmpEndDate = this.value[1] ? endDate.getUTCDate(): endDate.getDate()
+                year = endDate.getUTCFullYear()
+                month = endDate.getUTCMonth()
+                date = endDate.getUTCDate()
+
+                tmpYear = endDate.getUTCFullYear()
+                tmpMonth = endDate.getUTCMonth()
+
+                tmpStartYear = startDate.getUTCFullYear()
+                tmpStartMonth = startDate.getUTCMonth()
+                tmpStartDate = startDate.getUTCDate()
+
+                tmpEndYear = endDate.getUTCFullYear()
+                tmpEndMonth = endDate.getUTCMonth()
+                tmpEndDate = endDate.getUTCDate()
+
             }else{
                 startDate = endDate = this.value ? new Date(this.value) : now
 
-                year = this.value ? endDate.getUTCFullYear(): endDate.getFullYear()
-                month = this.value ? endDate.getUTCMonth(): endDate.getMonth()
-                date = this.value ? endDate.getUTCDate(): endDate.getDate()
-                tmpYear = this.value ? endDate.getUTCFullYear(): endDate.getFullYear()
-                tmpMonth = this.value ? endDate.getUTCMonth(): endDate.getMonth()
-                tmpStartYear = this.value ? startDate.getUTCFullYear(): startDate.getFullYear()
-                tmpStartMonth = this.value ? startDate.getUTCMonth(): startDate.getMonth()
-                tmpStartDate = this.value ? startDate.getUTCDate(): startDate.getDate()
-                tmpEndYear = this.value ? endDate.getUTCFullYear(): endDate.getFullYear()
-                tmpEndMonth = this.value ? endDate.getUTCMonth(): endDate.getMonth()
-                tmpEndDate = this.value ? endDate.getUTCDate(): endDate.getDate()
+                year = endDate.getUTCFullYear()
+                month = endDate.getUTCMonth()
+                date = endDate.getUTCDate()
+                
+                tmpYear = endDate.getUTCFullYear()
+                tmpMonth = endDate.getUTCMonth()
+
+                tmpStartYear = startDate.getUTCFullYear()
+                tmpStartMonth = startDate.getUTCMonth()
+                tmpStartDate = startDate.getUTCDate()
+
+                tmpEndYear = endDate.getUTCFullYear()
+                tmpEndMonth = endDate.getUTCMonth()
+                tmpEndDate = endDate.getUTCDate()
             }
 
             return {
