@@ -44,7 +44,8 @@
                     {value: 'en', label: 'English'},
                     {value: 'zh-cn', label: 'Chinese'},
                     {value: 'uk', label: 'Ukrainsk'},
-                    {value: 'es', label: 'Spanish'}
+                    {value: 'es', label: 'Spanish'},
+                    {value: 'fr', label: 'frensh'}
                 ],
                 language:"en",
                 selected: '2016-08-03',
