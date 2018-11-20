@@ -196,11 +196,21 @@
                     this.yearList = this.yearList.map((i) => i - 12)
                 }
             },
-            prevMonthPreview () {
-                this.tmpMonth = this.tmpMonth === 0 ? 0 : this.tmpMonth - 1
-            },
-            nextMonthPreview () {
-                this.tmpMonth = this.tmpMonth === 11 ? 11 : this.tmpMonth + 1
+            prevMonthPreview() { 
+                if (this.tmpMonth === 0) {
+                    this.tmpMonth = 11; 
+                    this.tmpYear = this.tmpYear - 1;
+                } else { 
+                    this.tmpMonth = this.tmpMonth - 1; 
+                } 
+            }, 
+            nextMonthPreview() { 
+                if (this.tmpMonth === 11) { 
+                    this.tmpMonth = 0; 
+                    this.tmpYear = this.tmpYear + 1;
+                } else { 
+                    this.tmpMonth = this.tmpMonth + 1; 
+                } 
             },
             selectYear (year) {
                 if(this.validateYear(year)) return
