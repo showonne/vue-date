@@ -28,6 +28,6 @@
     "less": "^3.0.2",
     "less-loader": "^4.1.0",
     "poi": "^10.1.5",
-    "webpack-cli": "^2.1.2"
+    "webpack-cli": "^5.1.4"
   }
 }
